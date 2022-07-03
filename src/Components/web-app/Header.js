@@ -1,12 +1,12 @@
 import React, { memo } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import RouteName from '../../CustomRoutes/RouteName';
 const Header = () => {
   return (
     <div>
       <Navbar expand="lg" className="px-4" bg="dark" variant="dark">
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+        <Navbar.Brand as={Link} to={RouteName.HOME}>Navbar scroll</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -33,6 +33,9 @@ const Header = () => {
             <Nav.Link as={Link} to={"/login"} eventKey={1}>
               Login
             </Nav.Link>
+            {/* <Nav.Link as={Link} to={RouteName.ADMIN} eventKey={1}>
+              Admin
+            </Nav.Link> */}
             <Nav.Link as={Link} to={"/register"} eventKey={2}>
               Register
             </Nav.Link>

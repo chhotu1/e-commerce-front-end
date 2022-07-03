@@ -1,15 +1,22 @@
 
-import { Route, Routes } from "react-router-dom";
-import Login from "../Pages/Login";
-import Home from "../Pages";
-import Register from "../Pages/Register";
+import { useLocation } from "react-router-dom";
+import RouteName from "./RouteName";
+import AdminRoutes from "./AdminRoutes";
+import GeneralRoutes from "./GeneralRoutes";
 const CustomRoutes = () => {
+    const location = useLocation();
+    const { pathname } = location;
+    const routesname = [RouteName.ADMIN];
+    let adminRouteIndex = routesname.findIndex((e) => e === pathname);
     return (
-        <Routes>
-            <Route exact={true} path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register/>}/>
-        </Routes>
+        <>
+            {adminRouteIndex !== -1 ? (
+                <AdminRoutes />
+            ) : (
+                <GeneralRoutes />
+            )}
+
+        </>
     )
 }
 

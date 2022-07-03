@@ -2,24 +2,15 @@
 import './App.css';
 import './styles.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import {BrowserRouter as Router} from 'react-router-dom';
-
-import Header from './Components/web-app/Header';
-import Footer from './Components/web-app/Footer';
+import { BrowserRouter as Router } from 'react-router-dom';
 import CustomRoutes from './CustomRoutes';
-function App() {
+
+function App(props) {
+  console.log(props,'props')
   return (
-    <>
-      
       <Router>
-      <Header />
-       
-        <CustomRoutes/>
-        <Footer />
+        <CustomRoutes />
       </Router>
-      
-    </>
   );
 }
 
