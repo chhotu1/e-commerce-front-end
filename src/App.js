@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CustomRoutes from './CustomRoutes';
 
-function App(props) {
-  console.log(props,'props')
+function App() {
   return (
       <Router>
         <CustomRoutes />

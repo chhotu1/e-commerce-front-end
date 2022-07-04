@@ -10,31 +10,20 @@ import {
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../Assets/images/bg2.jpg';
-const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
-//   const intl = useIntl();
+import { Link } from 'react-router-dom';
+
+const Aside = ({ toggled, handleToggleSidebar }) => {
   return (
     <ProSidebar
-      image={image ? sidebarBg : false}
-      rtl={rtl}
-      collapsed={collapsed}
+      image={sidebarBg}
       toggled={toggled}
       breakPoint="md"
       onToggle={handleToggleSidebar}
     >
       <SidebarHeader>
-        <div
-          style={{
-            padding: '24px',
-            textTransform: 'uppercase',
-            fontWeight: 'bold',
-            fontSize: 14,
-            letterSpacing: '1px',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            whiteSpace: 'nowrap',
-          }}
+        <div className='sidebarheader'
         >
-          E-commerce
+          <Link to="/">E-commerce</Link>
         </div>
       </SidebarHeader>
 
@@ -44,7 +33,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             icon={<FaTachometerAlt />}
             suffix={<span className="badge red">New</span>}
           >
-            Dashboard
+            <Link to="/admin">Dashboard</Link>
           </MenuItem>
           <MenuItem icon={<FaGem />}> Item</MenuItem>
         </Menu>
@@ -91,7 +80,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
           }}
         >
           <a
-            href="https://github.com/azouaoui-med/react-pro-sidebar"
+            href="#"
             target="_blank"
             className="sidebar-btn"
             rel="noopener noreferrer"

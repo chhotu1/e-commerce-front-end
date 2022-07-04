@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardGroup } from 'react-bootstrap';
-import { FaBeer,FaRegHeart,FaCartPlus } from 'react-icons/fa';
+import { FaRegHeart,FaCartPlus } from 'react-icons/fa';
 export default class TopProduct extends Component {
     render() {
         return (
