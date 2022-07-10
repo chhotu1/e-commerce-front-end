@@ -1,13 +1,10 @@
-const HOME ="/";
-const LOGIN ="/login";
-const REGISTER ="/register";
-const ADMIN ='/admin';
-
 const RouteName = {
-    HOME,
-    LOGIN,
-    REGISTER,
-    ADMIN
+    HOME:'/',
+    LOGIN:'/login',
+    REGISTER:'/register',
+    ADMIN:{
+        MAIN:'/admin',
+    }
 }
 
 export default RouteName
