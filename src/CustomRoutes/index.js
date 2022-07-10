@@ -6,7 +6,8 @@ import GeneralRoutes from "./GeneralRoutes";
 const CustomRoutes = () => {
     const location = useLocation();
     const { pathname } = location;
-    const routesname = [RouteName.ADMIN.MAIN];
+    const routesname = [RouteName.ADMIN.MAIN,RouteName.ADMIN.CATEGORY.MAIN,RouteName.ADMIN.CATEGORY.ADD,
+        RouteName.ADMIN.PRODUCT.MAIN,RouteName.ADMIN.PRODUCT.ADD,RouteName.ADMIN.USER.ADD,RouteName.ADMIN.USER.MAIN];
     let adminRouteIndex = routesname.findIndex((e) => e === pathname);
     return (
         <>
