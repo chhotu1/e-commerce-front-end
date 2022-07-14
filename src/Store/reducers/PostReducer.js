@@ -21,7 +21,7 @@ const initialState = {
 
 const postReducer = function (state = initialState, action) {
     let tags = [];
-
+    console.log(action.data,'action.data')
     switch (action.type) {
         case PostTypes.LIST_POSTS:
             return {

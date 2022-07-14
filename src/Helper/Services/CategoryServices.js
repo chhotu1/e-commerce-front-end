@@ -1,18 +1,19 @@
 import axios from 'axios';
+import Helper from './../../Helper';
 
 const CategoryServices = {
-    list: (page = 1) => {
-        return axios.get('/posts?page=' + page);
+    list: () => {
+        return axios.get(`categories`);
     },
     add: (payload) => {
         let data = CategoryServices.toFormData(payload);
-        return axios.post('/posts', data, {headers: {Authorization: 'Bearer ' + localStorage.getItem("user.api_token"), 'Content-Type': 'multipart/form-data'}});
+        return axios.post(`categories`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
     },
     showOne: (id) => {
-        return axios.get('/posts/' + id);
+        return axios.get(`categories/${id}`);
     },
     remove: (id) => {
-        return axios.delete('/posts/' + id, {headers: {Authorization: 'Bearer ' + localStorage.getItem("user.api_token")}});
+        return axios.delete(`categories/${id}`, {headers: {token:Helper.StorageService.getAccessToken()}});
     },
     toFormData: (payload) => {
         const formData = new FormData();

@@ -18,8 +18,7 @@ import { LIST_CATEGORIES,
     LIST_ALL_CATEGORIES
 } from '../actionTypes/CategoryTypes';
 
-import Category from '../../apis/Category';
-
+import Helper from '.././../Helper';
 function handleCategoryTitle(title)
 {
     return function (dispatch, getState) {
@@ -44,18 +43,13 @@ function setCategoryDefaults() {
 /**
  * list Categories action
  */
-function listCategories(page = 1) {
+function listCategories() {
     
     return function (dispatch, getState) {
-
-        // start sending request (first dispatch)
         dispatch({
             type: LIST_CATEGORIES
         });
-
-
-        // async call must dispatch action whether on success or failure
-        Category.list(page).then(response => {
+        Helper.CategoryServices.list().then(response => {
             dispatch({
                 type: LIST_CATEGORIES_SUCCESS,
                 data: response.data.data
@@ -79,7 +73,7 @@ function listAllCategories() {
     return function (dispatch, getState) {
 
         // async call
-        Category.listAll().then(response => {
+        Helper.CategoryServices.listAll().then(response => {
             dispatch({
                 type: LIST_ALL_CATEGORIES,
                 data: response.data.data
@@ -101,7 +95,7 @@ function addCategory (title, cb) {
         });
 
         // async call must dispatch action whether on success or failure
-        Category.add(title).then(response => {
+        Helper.CategoryServices.add(title).then(response => {
             dispatch({
                 type: CREATE_CATEGORIES_SUCCESS,
                 data: response.data
@@ -130,7 +124,7 @@ function showCategory(id)
 
 
         // async call must dispatch action whether on success or failure
-        Category.showOne(id).then(response => {
+        Helper.CategoryServices.showOne(id).then(response => {
             dispatch({
                 type: SHOW_CATEGORY_SUCCESS,
                 data: response.data
@@ -158,7 +152,7 @@ function editCategory(title, id, cb)
 
 
         // async call must dispatch action whether on success or failure
-        Category.edit(title, id).then(response => {
+        Helper.CategoryServices.edit(title, id).then(response => {
             dispatch({
                 type: EDIT_CATEGORIES_SUCCESS,
                 data: response.data
@@ -177,7 +171,7 @@ function editCategory(title, id, cb)
 /**
  * delete category action
  */
-function deleteCategory(id)
+function deleteCategory(id,fun)
 {
     return function (dispatch, getState) {
 
@@ -185,15 +179,21 @@ function deleteCategory(id)
         dispatch({
             type: DELETE_CATEGORIES
         });
-
-
-        // async call must dispatch action whether on success or failure
-        Category.remove(id).then(response => {
-            dispatch({
-                type: DELETE_CATEGORIES_SUCCESS,
-                message: response.data.message,
-                id: id
-            });
+        Helper.CategoryServices.remove(id).then(response => {
+            console.log(response.data)
+            if(response.data.status===true){
+                dispatch({
+                    type: DELETE_CATEGORIES_SUCCESS,
+                    message: response.data.message,
+                    id: id
+                });
+            }else{
+                dispatch({
+                    type: DELETE_CATEGORIES_FAILURE,
+                    error:response.data
+                })
+            }
+            fun(response)
         }).catch(error => {
             dispatch({
                 type: DELETE_CATEGORIES_FAILURE,

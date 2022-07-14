@@ -113,7 +113,7 @@ const userReducer = function (state = initialState, action) {
             };
         case UserTypes.DELETE_USERS_SUCCESS:
             let users = state.users;
-            users.data = state.users.data.filter(item => item.id != action.id);
+            users.data = state.users.data.filter(item => item.id !== action.id);
 
             return {
                 ...state,
@@ -160,9 +160,9 @@ function handleChange(state, action)
     } else {
         let checked = state.user.is_admin;
 
-        if(action.checked == true) {
+        if(action.checked === true) {
             checked = 1;
-        } else if(action.checked == false) {
+        } else if(action.checked === false) {
             checked = 0;
         }
 

@@ -19,7 +19,7 @@ import { LIST_CATEGORIES,
 } from '../actionTypes/CategoryTypes';
 
 const initialState = {
-    categories: {},        // used in listing page
+    categories: [],        // used in listing page
     all_categories: [],    // used in dropdowns
     category: {
         id: "",
@@ -56,6 +56,7 @@ const categoryReducer = function (state = initialState, action) {
                 list_spinner: true
             };
         case LIST_CATEGORIES_SUCCESS:
+            
             return {
                 ...state,
                 categories: action.data,
@@ -140,8 +141,7 @@ const categoryReducer = function (state = initialState, action) {
             };
         case DELETE_CATEGORIES_SUCCESS:
             let cats = state.categories;
-            cats.data = state.categories.data.filter(item => item.id != action.id);
-
+            cats = state.categories.filter(item => item._id !== action.id);
             return {
                 ...state,
                 list_spinner: false,
@@ -150,6 +150,7 @@ const categoryReducer = function (state = initialState, action) {
                 error_message: ''
             };
         case DELETE_CATEGORIES_FAILURE:
+            
             return {
                 ...state,
                 list_spinner: false,
