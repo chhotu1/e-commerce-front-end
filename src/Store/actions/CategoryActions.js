@@ -91,8 +91,6 @@ function listAllCategories() {
 function addCategory (title, cb) {
 
     return function(dispatch, getState) {
-
-        // start creation show spinner
         dispatch({
             type: CREATE_CATEGORIES
         });
