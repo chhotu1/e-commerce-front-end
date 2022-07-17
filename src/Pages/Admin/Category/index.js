@@ -18,7 +18,6 @@ class Category extends Component {
     }
     componentDidMount() {
         this.props.setCategoryDefaults();
-
         this.props.listCategories();
     }
 
@@ -43,6 +42,7 @@ class Category extends Component {
                                 <tr>
                                     <th>#</th>
                                     <th>Title</th>
+                                    <th>Image</th>
                                     <th>Status</th>
                                     <th>Created by</th>
                                     <th>Action</th>

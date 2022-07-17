@@ -19,11 +19,11 @@ const Forms = {
         else return "";
       case "password":
         if (!value) return "Password is Required";
-        else if (!Regex.PASSWORD_REGEX.test(value)){
-          if(value.length > 60)return "Password must not exceed 40 characters";
+        else if (!Regex.PASSWORD_REGEX.test(value)) {
+          if (value.length > 60) return "Password must not exceed 40 characters";
           return "Password must have at least 8 characters";
         }
-       
+
         else return "";
       case "phone":
         if (!value) return "Phone is Required";
@@ -49,8 +49,8 @@ const Forms = {
         else return "";
       case "password":
         if (!value) return "Password is Required";
-        else if (!Regex.PASSWORD_REGEX.test(value)){
-          if(value.length > 60)return "Password must not exceed 40 characters";
+        else if (!Regex.PASSWORD_REGEX.test(value)) {
+          if (value.length > 60) return "Password must not exceed 40 characters";
           return "Password must have at least 8 characters";
         }
         else return "";
@@ -60,8 +60,15 @@ const Forms = {
     }
   },
 
-
-
+  categoryForm: (name, value) => {
+    switch (name) {
+      case "title":
+        if (!value) return "Title is Required";
+        else return "";
+      default:
+        return "";
+    }
+  },
 
 };
 export default Forms;

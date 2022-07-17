@@ -15,20 +15,23 @@ import { LIST_CATEGORIES,
     DELETE_CATEGORIES_FAILURE,
     SET_CATEGORY_DEFAULTS,
     HANDLE_CATEGORY_TITLE,
-    LIST_ALL_CATEGORIES
+    LIST_ALL_CATEGORIES,
+    VALIDATE_CATEGORY_FORM,
 } from '../actionTypes/CategoryTypes';
 
 import Helper from '.././../Helper';
-function handleCategoryTitle(title)
-{
-    return function (dispatch, getState) {
 
+
+function handleCategoryChange(field, value) {
+    return function (dispatch, getState) {
         dispatch({
             type: HANDLE_CATEGORY_TITLE,
-            data: title
-        })
-    }
+            data: value,
+            field,
+        });
+    };
 }
+
 
 function setCategoryDefaults() {
 
@@ -101,7 +104,7 @@ function addCategory (title, cb) {
                 data: response.data
             });
 
-            cb();
+            cb(response);
         }).catch(error => {
             dispatch({
                 type: CREATE_CATEGORIES_FAILURE,
@@ -202,10 +205,19 @@ function deleteCategory(id,fun)
         });
     }
 }
+function checkCategoryValidation(value) {
+    return function (dispatch, getState) {
+        dispatch({
+            type: VALIDATE_CATEGORY_FORM,
+            data: value
+        });
+    };
+}
 
 export {
+    checkCategoryValidation,
     listCategories,
-    handleCategoryTitle,
+    handleCategoryChange,
     addCategory,
     showCategory,
     editCategory,

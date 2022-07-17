@@ -29,10 +29,16 @@ class Rows extends Component {
 
   render() {
     const { category, index } = this.props;
+    console.log(category)
     return (
       <tr>
         <td>{index + 1}</td>
         <td>{category?.title}</td>
+        <td>
+          {category?.image?(
+            <img src={category?.image} alt="" style={{height:100,width:100}}/>
+          ):''}
+        </td>
         <td>{category?.status === 1 ? 'Active' : 'Deactive'}</td>
         <td>{category?.created_by?.name}</td>
         <td>

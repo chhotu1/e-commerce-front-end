@@ -1,4 +1,5 @@
-import { LIST_CATEGORIES,
+import {
+    LIST_CATEGORIES,
     LIST_CATEGORIES_SUCCESS,
     LIST_CATEGORIES_FAILURE,
     CREATE_CATEGORIES,
@@ -15,16 +16,20 @@ import { LIST_CATEGORIES,
     DELETE_CATEGORIES_FAILURE,
     SET_CATEGORY_DEFAULTS,
     HANDLE_CATEGORY_TITLE,
-    LIST_ALL_CATEGORIES
+    LIST_ALL_CATEGORIES,
+    VALIDATE_CATEGORY_FORM
 } from '../actionTypes/CategoryTypes';
-
+import Helper from '../../Helper';
 const initialState = {
     categories: [],        // used in listing page
     all_categories: [],    // used in dropdowns
     category: {
         id: "",
         title: "",
-        slug: ""
+        image_url: ""
+    },
+    formError: {
+        title: '',
     },
     success_message: "",
     error_message: "",
@@ -38,7 +43,7 @@ const categoryReducer = function (state = initialState, action) {
         case SET_CATEGORY_DEFAULTS:
             return {
                 ...state,
-                category: {...state.category},
+                category: { ...state.category },
                 success_message: "",
                 error_message: "",
                 validation_errors: null,
@@ -46,17 +51,20 @@ const categoryReducer = function (state = initialState, action) {
                 create_update_spinner: false
             };
         case HANDLE_CATEGORY_TITLE:
-            return {
-                ...state,
-                category: {...state.category, title: action.data}
-            };
+            return handleChange(state, action);
+        // return {
+        //     ...state,
+        //     category: { ...state.category, title: action.data }
+        // };
+        case VALIDATE_CATEGORY_FORM:
+            return handleCheckFormValidation(state, action);
         case LIST_CATEGORIES:
             return {
                 ...state,
                 list_spinner: true
             };
         case LIST_CATEGORIES_SUCCESS:
-            
+
             return {
                 ...state,
                 categories: action.data,
@@ -150,7 +158,7 @@ const categoryReducer = function (state = initialState, action) {
                 error_message: ''
             };
         case DELETE_CATEGORIES_FAILURE:
-            
+
             return {
                 ...state,
                 list_spinner: false,
@@ -161,5 +169,21 @@ const categoryReducer = function (state = initialState, action) {
             return state;
     }
 };
+
+function handleChange(state, action) {
+    return {
+        ...state,
+        category: { ...state.category, [action.field]: action.data },
+        formError: { ...state.formError, [action.field]: Helper.Forms.categoryForm(action.field, action.data) }
+    };
+}
+
+function handleCheckFormValidation(state, action) {
+    return {
+        ...state,
+        formError: { ...state.formError, ...action.data }
+    };
+}
+
 
 export default categoryReducer;
