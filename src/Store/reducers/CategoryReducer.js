@@ -26,7 +26,8 @@ const initialState = {
     category: {
         id: "",
         title: "",
-        image_url: ""
+        image_url: "",
+        image_name:""
     },
     formError: {
         title: '',

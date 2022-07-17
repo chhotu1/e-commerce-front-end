@@ -11,7 +11,7 @@ import storage from '../../../util/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';
-import { listCategories, setCategoryDefaults, checkCategoryValidation, handleCategoryChange,addCategory } from '../../../Store/actions/CategoryActions';
+import {  setCategoryDefaults, checkCategoryValidation, handleCategoryChange,addCategory } from '../../../Store/actions/CategoryActions';
 import { CustomLoader } from '../../../Components/shared';
 import withRouter from '../../../Components/shared/withRouter';
 class Add extends Component {
@@ -40,7 +40,8 @@ class Add extends Component {
             alert("Please choose a file first!")
         } else {
             let $this = this;
-            const storageRef = ref(storage, `/files/${file.name}`)
+            let imageName = `${new Date().getTime()}_${file.name}`;
+            const storageRef = ref(storage, `/category/${imageName}`)
             const uploadTask = uploadBytesResumable(storageRef, file);
             uploadTask.on(
                 "state_changed",
@@ -48,12 +49,13 @@ class Add extends Component {
                     const percent = Math.round(
                         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                     );
+                    console.log(percent)
                 },
                 (err) => console.log(err),
                 () => {
                     getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                         $this.props.category.category.image_url = url;
-                        console.log($this.props.category.category);
+                        $this.props.category.category.image_name = imageName;
                         $this.save();
                     });
                 }
@@ -111,7 +113,6 @@ class Add extends Component {
     }
 
     render() {
-        console.log(this.props,'=====',)
         return (
             <div className={`admin-app ${this.state.toggled ? 'toggled' : ''}`}>
                 <Aside
