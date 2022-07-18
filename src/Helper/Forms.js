@@ -70,5 +70,15 @@ const Forms = {
     }
   },
 
+  productForm: (name, value) => {
+    switch (name) {
+      case "title":
+        if (!value) return "Title is Required";
+        else return "";
+      default:
+        return "";
+    }
+  },
+
 };
 export default Forms;
