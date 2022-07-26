@@ -41,6 +41,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('kjhgfdfghjk')
     this.setState({isLoader:true});
     Helper.AuthServices.login(this.state.form).then((response) => {
       
