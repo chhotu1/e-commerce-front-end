@@ -1,25 +1,25 @@
 import axios from 'axios';
-
+import Helper from './../../Helper';
 const UserServices = {
-    list: (page = 1) => {
-        return axios.get('/posts?page=' + page);
+    list: () => {
+        return axios.get(`user`, {headers: {token: Helper.StorageService.getAccessToken()}});
     },
     add: (payload) => {
         let data = UserServices.toFormData(payload);
-        return axios.post('/posts', data, {headers: {Authorization: 'Bearer ' + localStorage.getItem("user.api_token"), 'Content-Type': 'multipart/form-data'}});
+        return axios.post(`user`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
     },
-    showOne: (id) => {
-        return axios.get('/posts/' + id);
-    },
-    edit: (payload, id) => {
+    edit: (payload,id) => {
         let data = UserServices.toFormData(payload);
         data.append('_method', 'PUT');
-
-        return axios.post('/posts/' + id, data, {headers: {Authorization: 'Bearer ' + localStorage.getItem("user.api_token"), 'Content-Type': 'multipart/form-data'}});
+        return axios.post(`user/${id}`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
+    },
+    showOne: (id) => {
+        return axios.get(`user/${id}`, {headers: {token: Helper.StorageService.getAccessToken()}});
     },
     remove: (id) => {
-        return axios.delete('/posts/' + id, {headers: {Authorization: 'Bearer ' + localStorage.getItem("user.api_token")}});
+        return axios.delete(`user/${id}`, {headers: {token: Helper.StorageService.getAccessToken()}});
     },
+
     toFormData: (payload) => {
         const formData = new FormData();
         for (let key in payload) {

@@ -13,8 +13,8 @@ const RouteName = {
             ADD:'/admin/product/add',
         },
         USER:{
-            MAIN:'/admin/user',
-            ADD:'/admin/user/add',
+            MAIN:'/admin/users',
+            ADD:'/admin/users/add',
         }
     }
 }

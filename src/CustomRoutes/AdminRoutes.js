@@ -7,6 +7,9 @@ import CategoryAdd from '../Pages/Admin/Category/Add';
 import Product from '../Pages/Admin/Product';
 import ProductAdd from '../Pages/Admin/Product/Add';
 
+import Users from '../Pages/Admin/Users';
+import UsersAdd from '../Pages/Admin/Users/Add';
+
 import RouteName from './RouteName';
 import Sidebar from '../Components/admin-app/Sidebar';
 import ProtectedRoutes from './ProtectedRoutes';
@@ -22,6 +25,10 @@ const AdminRoutes = () => {
             <Route  path={RouteName.ADMIN.CATEGORY.ADD} element={<CategoryAdd />} />
             <Route exact={true} path={RouteName.ADMIN.PRODUCT.MAIN} element={<Product />} />
             <Route  path={RouteName.ADMIN.PRODUCT.ADD} element={<ProductAdd />} />
+            <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
+            <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
+            <Route  path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
+
             {/* <Route exact={true} path={Helper.RoutesName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} />
             <Route element={<DashboardRoutes isLoggedIn={props.auth.user_payer_id} />}>
               <Route exact={true} path={"/dashboard"} element={<Dashboard />} />

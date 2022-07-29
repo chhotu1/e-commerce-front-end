@@ -1,6 +1,6 @@
 import * as UserTypes from '../actionTypes/UserTypes';
 
-import User from '../../apis/User';
+import UserServices from '../../Helper/Services/UserServices';
 
 
 /**
@@ -9,7 +9,6 @@ import User from '../../apis/User';
 function setUserDefaults() {
 
     return function (dispatch, getState) {
-
         dispatch({
             type: UserTypes.SET_USER_DEFAULTS
         });
@@ -19,16 +18,13 @@ function setUserDefaults() {
 /**
  * list Users action
  */
-function listUsers(page = 1) {
+function listUsers() {
 
     return function (dispatch, getState) {
-
         dispatch({
             type: UserTypes.LIST_USERS
         });
-
-
-        User.list(page).then(response => {
+        UserServices.list().then(response => {
             dispatch({
                 type: UserTypes.LIST_USERS_SUCCESS,
                 data: response.data.data
@@ -53,7 +49,7 @@ function addUser (title, cb) {
             type: UserTypes.CREATE_USERS
         });
 
-        User.add(title).then(response => {
+        UserServices.add(title).then(response => {
             dispatch({
                 type: UserTypes.CREATE_USERS_SUCCESS,
                 data: response.data
@@ -80,7 +76,7 @@ function showUser(id)
             type: UserTypes.SHOW_USER
         });
 
-        User.showOne(id).then(response => {
+        UserServices.showOne(id).then(response => {
             dispatch({
                 type: UserTypes.SHOW_USER_SUCCESS,
                 data: response.data
@@ -106,7 +102,7 @@ function editUser(payload, id, cb)
             type: UserTypes.EDIT_USERS
         });
 
-        User.edit(payload, id).then(response => {
+        UserServices.edit(payload, id).then(response => {
             dispatch({
                 type: UserTypes.EDIT_USERS_SUCCESS,
                 data: response.data
@@ -125,22 +121,53 @@ function editUser(payload, id, cb)
 /**
  * delete user action
  */
-function deleteUser(id)
+// function deleteUser(id,fun)
+// {
+//     return function (dispatch, getState) {
+
+
+//         dispatch({
+//             type: UserTypes.DELETE_USERS
+//         });
+
+
+//         UserServices.remove(id).then(response => {
+//             dispatch({
+//                 type: UserTypes.DELETE_USERS_SUCCESS,
+//                 message: response.data.message,
+//                 id: id
+//             });
+//         }).catch(error => {
+//             dispatch({
+//                 type: UserTypes.DELETE_USERS_FAILURE,
+//                 error: error.response.data
+//             })
+//         });
+//     }
+// }
+
+function deleteUser(id,fun)
 {
     return function (dispatch, getState) {
 
-
+        // start creation show spinner
         dispatch({
             type: UserTypes.DELETE_USERS
         });
-
-
-        User.remove(id).then(response => {
-            dispatch({
-                type: UserTypes.DELETE_USERS_SUCCESS,
-                message: response.data.message,
-                id: id
-            });
+        UserServices.remove(id).then(response => {
+            if(response.data.status===true){
+                dispatch({
+                    type: UserTypes.DELETE_USERS_SUCCESS,
+                    message: response.data.message,
+                    id: id
+                });
+            }else{
+                dispatch({
+                    type: UserTypes.DELETE_USERS_FAILURE,
+                    error:response.data
+                })
+            }
+            fun(response)
         }).catch(error => {
             dispatch({
                 type: UserTypes.DELETE_USERS_FAILURE,

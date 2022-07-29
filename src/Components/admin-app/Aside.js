@@ -23,7 +23,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
       <SidebarHeader>
         <div className='sidebarheader'
         >
-          <Link to="/">E-commerce</Link>
+          <Link to="/">Pixlerlab</Link>
         </div>
       </SidebarHeader>
 
@@ -35,7 +35,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
           >
             <Link to="/admin">Dashboard</Link>
           </MenuItem>
-          <MenuItem icon={<FaGem />}> Item</MenuItem>
+          <MenuItem icon={<FaGem />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem>
         </Menu>
         <Menu iconShape="circle">
           <SubMenu
@@ -52,7 +52,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             <MenuItem> <Link to={Helper.RouteName.ADMIN.PRODUCT.MAIN}>List</Link></MenuItem>
             <MenuItem> <Link to={Helper.RouteName.ADMIN.PRODUCT.ADD}>Add</Link></MenuItem>
           </SubMenu>
-
+          {/*
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
             title="Menu"
@@ -71,7 +71,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             <MenuItem> 2</MenuItem>
             <MenuItem> 3</MenuItem>
           </SubMenu>
-          <SubMenu title="sss" icon={<FaList />}>
+           <SubMenu title="sss" icon={<FaList />}>
             <MenuItem> 1 </MenuItem>
             <MenuItem> 2 </MenuItem>
             <SubMenu title={`$ 3`}>
@@ -83,7 +83,7 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
                 <MenuItem> 3.3.3 </MenuItem>
               </SubMenu>
             </SubMenu>
-          </SubMenu>
+          </SubMenu> */}
         </Menu>
       </SidebarContent>
 
@@ -95,14 +95,14 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
           }}
         >
           <a
-            href="#"
+            href="https://www.pixlerlab.com/"
             target="_blank"
             className="sidebar-btn"
             rel="noopener noreferrer"
           >
             <FaGithub />
             <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-              test.com
+              pixlerlab.com
             </span>
           </a>
         </div>

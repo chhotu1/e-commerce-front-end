@@ -1,13 +1,33 @@
 import * as UserTypes from '../actionTypes/UserTypes';
 
 const initialState = {
-    users: {},
+    users: [],
     user: {
-        id: "",
         name: "",
         email: "",
         password: "",
-        is_admin: 0
+        role: 1,
+        date_of_birth: "",
+        experience: "",
+        specialist: "",
+        parmanent_address: "",
+        current_address: "",
+        parmanent_state: "",
+        parmanent_city: "",
+        parmanent_country: "",
+        parmanent_pincode: "",
+        current_state: "",
+        current_city: "",
+        current_country: "",
+        current_pincode: "",
+        adhar_no: "",
+        pain_no: "",
+        father_mobile_no: "",
+        phone: "",
+        other_phone: "",
+        friend_phone: "",
+        photo: "",
+        status: 1,
     },
     success_message: "",
     error_message: "",
@@ -21,7 +41,7 @@ const userReducer = function (state = initialState, action) {
         case UserTypes.SET_USER_DEFAULTS:
             return {
                 ...state,
-                user: {...state.user},
+                user: { ...state.user },
                 success_message: "",
                 error_message: "",
                 validation_errors: {},
@@ -76,7 +96,7 @@ const userReducer = function (state = initialState, action) {
             return {
                 ...state,
                 create_update_spinner: false,
-                user: {...action.data.data, password: ""}
+                user: { ...action.data.data, password: "" }
             };
         case UserTypes.SHOW_USER_FAILURE:
             return {
@@ -113,7 +133,7 @@ const userReducer = function (state = initialState, action) {
             };
         case UserTypes.DELETE_USERS_SUCCESS:
             let users = state.users;
-            users.data = state.users.data.filter(item => item.id !== action.id);
+            users = state.users.filter(item => item._id !== action.id);
 
             return {
                 ...state,
@@ -122,6 +142,7 @@ const userReducer = function (state = initialState, action) {
                 success_message: action.message,
                 error_message: ''
             };
+
         case UserTypes.DELETE_USERS_FAILURE:
             return {
                 ...state,
@@ -150,25 +171,24 @@ const userReducer = function (state = initialState, action) {
 /**
  * handle field change
  */
-function handleChange(state, action)
-{
-    if(action.field !== 'is_admin') {
+function handleChange(state, action) {
+    if (action.field !== 'is_admin') {
         return {
             ...state,
-            user: {...state.user, [action.field]: action.data}
+            user: { ...state.user, [action.field]: action.data }
         };
     } else {
         let checked = state.user.is_admin;
 
-        if(action.checked === true) {
+        if (action.checked === true) {
             checked = 1;
-        } else if(action.checked === false) {
+        } else if (action.checked === false) {
             checked = 0;
         }
 
         return {
             ...state,
-            user: {...state.user, is_admin: checked}
+            user: { ...state.user, is_admin: checked }
         };
     }
 }
