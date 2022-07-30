@@ -6,7 +6,7 @@ const UserServices = {
     },
     add: (payload) => {
         let data = UserServices.toFormData(payload);
-        return axios.post(`user`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
+        return axios.post(`register`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
     },
     edit: (payload,id) => {
         let data = UserServices.toFormData(payload);

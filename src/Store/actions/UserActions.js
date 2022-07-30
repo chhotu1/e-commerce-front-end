@@ -48,14 +48,12 @@ function addUser (title, cb) {
         dispatch({
             type: UserTypes.CREATE_USERS
         });
-
         UserServices.add(title).then(response => {
             dispatch({
                 type: UserTypes.CREATE_USERS_SUCCESS,
                 data: response.data
             });
-
-            cb();
+            cb(response);
         }).catch(error => {
             dispatch({
                 type: UserTypes.CREATE_USERS_FAILURE,

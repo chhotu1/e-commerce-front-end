@@ -9,6 +9,7 @@ import ProductAdd from '../Pages/Admin/Product/Add';
 
 import Users from '../Pages/Admin/Users';
 import UsersAdd from '../Pages/Admin/Users/Add';
+import UsersEdit from '../Pages/Admin/Users/Edit';
 
 import RouteName from './RouteName';
 import Sidebar from '../Components/admin-app/Sidebar';
@@ -28,6 +29,7 @@ const AdminRoutes = () => {
             <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
             <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
             <Route  path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
+            <Route  path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
 
             {/* <Route exact={true} path={Helper.RoutesName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} />
             <Route element={<DashboardRoutes isLoggedIn={props.auth.user_payer_id} />}>

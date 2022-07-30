@@ -11,10 +11,10 @@ import storage from '../../../util/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';
-import {  setUserDefaults, checkUserValidation, handleUserChange,addUser } from '../../../Store/actions/UserActions';
+import {  setUserDefaults, checkUserValidation, handleUserChange,addUser,showUser } from '../../../Store/actions/UserActions';
 import { CustomLoader } from '../../../Components/shared';
 import withRouter from '../../../Components/shared/withRouter';
-class Add extends Component {
+class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -29,6 +29,7 @@ class Add extends Component {
 
     componentDidMount() {
         this.props.setUserDefaults();
+        this.props.showUser(this.props.router.params.id);
     }
 
     handleToggleSidebar(value) {
@@ -113,6 +114,8 @@ class Add extends Component {
     }
 
     render() {
+
+       
         return (
             <div className={`admin-app ${this.state.toggled ? 'toggled' : ''}`}>
                 <Aside
@@ -151,7 +154,9 @@ const mapDispatchToProps = (dispatch) => {
         checkUserValidation: (value) => dispatch(checkUserValidation(value)),
         setUserDefaults: () => dispatch(setUserDefaults()),
         addUser: (payload, cb) => dispatch(addUser(payload, cb)),
+        showUser: (id) => dispatch(showUser(id)),
+        
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Add));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Edit));
