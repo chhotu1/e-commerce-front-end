@@ -80,5 +80,40 @@ const Forms = {
     }
   },
 
+  userForm: (name, value) => {
+    switch (name) {
+      case "email":
+        if (!value) return "The email field is required";
+        else if (!Regex.EMAIL_REGEXP.test(value))
+          return "Enter a valid email address";
+        else return "";
+      case "password":
+        if (!value) return "The password field is required";
+        else if (!Regex.PASSWORD_REGEX.test(value)) {
+          if (value.length > 60) return "Password must not exceed 40 characters";
+          return "Password must have at least 8 characters";
+        }
+        else return "";
+      case "phone":
+        if (!value) return "The phone field is required";
+        else if (!Regex.MOBILE_REGEX.test(value))
+          return "Phone number must be 10 digits";
+        else return "";
+      case "name":
+        if (!value) return "The name field is required";
+        else if (!Regex.FULL_NAME_REGEX.test(value))
+          return "Name should be text";
+        else return "";
+        case "role":
+          if (!value) return "The role field is required";
+          else return "";
+          case "status":
+          if (!value) return "The status field is required";
+          else return "";
+      default:
+        return "";
+    }
+  },
+
 };
 export default Forms;

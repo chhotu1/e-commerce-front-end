@@ -208,7 +208,17 @@ function resetUserFields() {
     }
 }
 
+function checkUserValidation(value) {
+    return function (dispatch, getState) {
+        dispatch({
+            type: UserTypes.VALIDATE_USER_FORM,
+            data: value
+        });
+    };
+}
+
 export {
+    checkUserValidation,
     setUserDefaults,
     listUsers,
     addUser,

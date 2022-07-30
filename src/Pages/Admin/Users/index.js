@@ -45,6 +45,7 @@ class Users extends Component {
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Created by</th>
+                                    <th>Role</th>
                                     <th>Action</th>
                                 </tr>
 

@@ -203,6 +203,7 @@ function deleteCategory(id,fun)
         });
     }
 }
+
 function checkCategoryValidation(value) {
     return function (dispatch, getState) {
         dispatch({

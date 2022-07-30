@@ -1,34 +1,40 @@
 import * as UserTypes from '../actionTypes/UserTypes';
+import Forms from '../../Helper/Forms';
+const initialValue = {
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    date_of_birth: "",
+    experience: "",
+    specialist: "",
+    parmanent_address: "",
+    current_address: "",
+    parmanent_state: "",
+    parmanent_city: "",
+    parmanent_country: "",
+    parmanent_pincode: "",
+    current_state: "",
+    current_city: "",
+    current_country: "",
+    current_pincode: "",
+    adhar_no: "",
+    pain_no: "",
+    father_mobile_no: "",
+    phone: "",
+    other_phone: "",
+    friend_phone: "",
+    photo: "",
+    status: "",
+    image_name:"",
+    access_token: "",
+    image_url:"",
+}
 
 const initialState = {
     users: [],
-    user: {
-        name: "",
-        email: "",
-        password: "",
-        role: 1,
-        date_of_birth: "",
-        experience: "",
-        specialist: "",
-        parmanent_address: "",
-        current_address: "",
-        parmanent_state: "",
-        parmanent_city: "",
-        parmanent_country: "",
-        parmanent_pincode: "",
-        current_state: "",
-        current_city: "",
-        current_country: "",
-        current_pincode: "",
-        adhar_no: "",
-        pain_no: "",
-        father_mobile_no: "",
-        phone: "",
-        other_phone: "",
-        friend_phone: "",
-        photo: "",
-        status: 1,
-    },
+    user: initialValue,
+    formError: initialValue,
     success_message: "",
     error_message: "",
     validation_errors: {},
@@ -163,6 +169,8 @@ const userReducer = function (state = initialState, action) {
             };
         case UserTypes.HANDLE_USER_CHANGE:
             return handleChange(state, action);
+        case UserTypes.VALIDATE_USER_FORM:
+            return handleCheckFormValidation(state, action);
         default:
             return state;
     }
@@ -171,26 +179,21 @@ const userReducer = function (state = initialState, action) {
 /**
  * handle field change
  */
+
+
 function handleChange(state, action) {
-    if (action.field !== 'is_admin') {
-        return {
-            ...state,
-            user: { ...state.user, [action.field]: action.data }
-        };
-    } else {
-        let checked = state.user.is_admin;
+    return {
+        ...state,
+        user: { ...state.user, [action.field]: action.data },
+        formError: { ...state.formError, [action.field]: Forms.userForm(action.field, action.data) }
+    };
+}
 
-        if (action.checked === true) {
-            checked = 1;
-        } else if (action.checked === false) {
-            checked = 0;
-        }
-
-        return {
-            ...state,
-            user: { ...state.user, is_admin: checked }
-        };
-    }
+function handleCheckFormValidation(state, action) {
+    return {
+        ...state,
+        formError: { ...state.formError, ...action.data }
+    };
 }
 
 export default userReducer;
