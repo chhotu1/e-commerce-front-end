@@ -102,7 +102,7 @@ const userReducer = function (state = initialState, action) {
             return {
                 ...state,
                 create_update_spinner: false,
-                user: { ...action.data.data, password: "" }
+                user: { ...action.data.data }
             };
         case UserTypes.SHOW_USER_FAILURE:
             return {

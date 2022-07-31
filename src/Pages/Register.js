@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import Helper from '../Helper';
+// import Helper from '../Helper';
 import withRouter from '../Components/shared/withRouter'
 class Register extends Component {
   constructor(props) {

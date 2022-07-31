@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { deleteUser } from '../../../Store/actions/UserActions';
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { deleteStorageImage } from '../../../util/FileStorage';
+import { deleteStorageImage } from '../../../utils/FileStorage';
 import Helper from '../../../Helper';
 class Rows extends Component {
   constructor(props) {

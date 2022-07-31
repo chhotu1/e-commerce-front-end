@@ -9,7 +9,7 @@ import CardContainer from '../../../Components/shared/CardContainer';
 import { toast } from 'react-toastify';
 
 import Helper from '../../../Helper';
-import storage from '../../../util/firebaseConfig';
+import storage from '../../../utils/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { connect } from 'react-redux';
 import { setCategoryDefaults, listCategories } from '../../../Store/actions/CategoryActions';

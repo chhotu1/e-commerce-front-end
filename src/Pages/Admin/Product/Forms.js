@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form } from 'react-bootstrap'
 export default class Forms extends Component {
     render() {
-        const { formErrors, handleChange, product, categories } = this.props;
+        const { formErrors, handleChange, categories } = this.props;
         return (
             <div className='row'>
                 <div className='col-md-6'>

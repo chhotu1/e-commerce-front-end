@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap';
+import Countries from '../../../staticData/countries';
+import Constant from '../../../utils/Constant';
 export default class Forms extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const { formErrors, handleChange, user } = this.props;
+    const { formErrors, handleChange, user,current_states,paramanent_states,current_cities,paramanent_cities } = this.props;
     return (
       <div>
         <div className='row'>
@@ -43,9 +45,13 @@ export default class Forms extends Component {
               <Form.Label>Role</Form.Label>
               <Form.Select aria-label="Select role" name="role" onChange={handleChange} value={user?.role}>
                 <option>Select role</option>
-                <option value={1}>One</option>
-                <option value={2}>Two</option>
-                <option value={3}>Three</option>
+                {Constant.ROLE &&Constant.ROLE.map((item,index)=>{
+                  return(
+                    <option value={item.value} key={index}>{item.name}</option>
+                  )
+                }) }
+               
+               
               </Form.Select>
               {formErrors?.role ? (<div className="error">{formErrors?.role}</div>) : null}
             </Form.Group>
@@ -112,9 +118,11 @@ export default class Forms extends Component {
               <Form.Label>Status</Form.Label>
               <Form.Select aria-label="Enter status" name="status" onChange={handleChange} value={user?.status}>
                 <option>Enter status</option>
-                <option value={1}>One</option>
-                <option value={2}>Two</option>
-                <option value={3}>Three</option>
+                {Constant.STATUS &&Constant.STATUS.map((item,index)=>{
+                  return(
+                    <option value={item.value} key={index}>{item.name}</option>
+                  )
+                }) }
               </Form.Select>
               {formErrors?.status ? (<div className="error">{formErrors?.status}</div>) : null}
             </Form.Group>
@@ -131,21 +139,46 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
-              <Form.Control type="text" name="current_country" placeholder="Enter country" onChange={handleChange} value={user?.current_country} />
+              {/* <Form.Control type="text" name="current_country" placeholder="Enter country" onChange={handleChange} value={user?.current_country} /> */}
+              <Form.Select aria-label="Select role" name="current_country" onChange={handleChange} value={user?.current_country}>
+                <option>Select Country</option>
+                {Countries && Countries.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+
               {formErrors?.current_country ? (<div className="error">{formErrors?.current_country}</div>) : null}
             </Form.Group>
           </div>
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>State</Form.Label>
-              <Form.Control type="text" name="current_state" placeholder="Enter state" onChange={handleChange} value={user?.current_state} />
+              {/* <Form.Control type="text" name="current_state" placeholder="Enter state" onChange={handleChange} value={user?.current_state} /> */}
+              <Form.Select aria-label="Select role" name="current_state" onChange={handleChange} value={user?.current_state}>
+                <option>Select state</option>
+                {current_states && current_states.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
               {formErrors?.current_state ? (<div className="error">{formErrors?.current_state}</div>) : null}
             </Form.Group>
           </div>
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" name="current_city" placeholder="Enter city" onChange={handleChange} value={user?.current_city} />
+              <Form.Select aria-label="Select role" name="current_city" onChange={handleChange} value={user?.current_city}>
+                <option>Select city</option>
+                {current_cities && current_cities.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+              {/* <Form.Control type="text" name="current_city" placeholder="Enter city" onChange={handleChange} value={user?.current_city} /> */}
               {formErrors?.current_city ? (<div className="error">{formErrors?.current_city}</div>) : null}
             </Form.Group>
           </div>
@@ -171,21 +204,45 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
-              <Form.Control type="text" name="parmanent_country" placeholder="Enter country" onChange={handleChange} value={user?.parmanent_country} />
+              <Form.Select aria-label="Select role" name="parmanent_country" onChange={handleChange} value={user?.parmanent_country}>
+                <option>Select Country</option>
+                {Countries && Countries.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+              {/* <Form.Control type="text" name="parmanent_country" placeholder="Enter country" onChange={handleChange} value={user?.parmanent_country} /> */}
               {formErrors?.parmanent_country ? (<div className="error">{formErrors?.parmanent_country}</div>) : null}
             </Form.Group>
           </div>
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>State</Form.Label>
-              <Form.Control type="text" name="parmanent_state" placeholder="Enter state" onChange={handleChange} value={user?.parmanent_state} />
+              <Form.Select aria-label="Select role" name="parmanent_state" onChange={handleChange} value={user?.parmanent_state}>
+                <option>Select state</option>
+                {paramanent_states && paramanent_states.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+              {/* <Form.Control type="text" name="parmanent_state" placeholder="Enter state" onChange={handleChange} value={user?.parmanent_state} /> */}
               {formErrors?.parmanent_state ? (<div className="error">{formErrors?.parmanent_state}</div>) : null}
             </Form.Group>
           </div>
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" name="parmanent_city" placeholder="Enter city" onChange={handleChange} value={user?.parmanent_city} />
+              <Form.Select aria-label="Select role" name="parmanent_city" onChange={handleChange} value={user?.parmanent_city}>
+                <option>Select city</option>
+                {paramanent_cities && paramanent_cities.map((item,index)=>{
+                  return(
+                      <option value={item.id} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+              {/* <Form.Control type="text" name="parmanent_city" placeholder="Enter city" onChange={handleChange} value={user?.parmanent_city} /> */}
               {formErrors?.parmanent_city ? (<div className="error">{formErrors?.parmanent_city}</div>) : null}
             </Form.Group>
           </div>

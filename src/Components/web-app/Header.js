@@ -36,9 +36,9 @@ const Header = () => {
             {/* <Nav.Link as={Link} to={RouteName.ADMIN} eventKey={1}>
               Admin
             </Nav.Link> */}
-            <Nav.Link as={Link} to={"/register"} eventKey={2}>
+            {/* <Nav.Link as={Link} to={"/register"} eventKey={2}>
               Register
-            </Nav.Link>
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

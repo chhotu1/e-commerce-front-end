@@ -7,13 +7,16 @@ import { toast } from 'react-toastify';
 
 import Helper from '../../../Helper';
 import Forms from './Forms';
-import storage from '../../../util/firebaseConfig';
+import storage from '../../../utils/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';
 import {  setUserDefaults, checkUserValidation, handleUserChange,addUser } from '../../../Store/actions/UserActions';
 import { CustomLoader } from '../../../Components/shared';
 import withRouter from '../../../Components/shared/withRouter';
+import States from '../../../staticData/states';
+import Cities from '../../../staticData/cities';
+
 class Add extends Component {
     constructor(props) {
         super(props);
@@ -21,6 +24,10 @@ class Add extends Component {
             toggled: false,
             file: '',
             isSpinner:false,
+            current_states:[],
+            current_cities:[],
+            paramanent_states:[],
+            paramanent_cities:[],
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
@@ -67,6 +74,22 @@ class Add extends Component {
         const { name, value } = event.target;
         if (name === 'photo') {
             this.setState({ file: event.target.files[0] })
+        }else if(name==='parmanent_country'){
+            this.props.handleUserChange(name, value);
+            let states = States.filter((e)=>e.country_id===value);
+            this.setState({paramanent_states:states});
+        }else if(name==='current_country'){
+            this.props.handleUserChange(name, value);
+            let states = States.filter((e)=>e.country_id===value);
+            this.setState({current_states:states});
+        }else if(name==='parmanent_state'){
+            this.props.handleUserChange(name, value);
+            let cities = Cities.filter((e)=>e.state_id===value);
+            this.setState({paramanent_cities:cities});
+        }else if(name==='current_state'){
+            this.props.handleUserChange(name, value);
+            let cities = Cities.filter((e)=>e.state_id===value);
+            this.setState({current_cities:cities});
         } else {
             this.props.handleUserChange(name, value);
         }
@@ -113,6 +136,7 @@ class Add extends Component {
     }
 
     render() {
+        const {current_states,paramanent_states,current_cities,paramanent_cities} = this.state;
         return (
             <div className={`admin-app ${this.state.toggled ? 'toggled' : ''}`}>
                 <Aside
@@ -125,7 +149,7 @@ class Add extends Component {
                         {this.state.isSpinner?(<CustomLoader/>):''}
                         <CardContainer title="Add User" backLink={Helper.RouteName.ADMIN.USER.MAIN}>
                             <Form onSubmit={this.handleSubmit}>
-                                <Forms handleChange={this.handleChange} formErrors={this.props.user.formError} user={this.props.user.user} />
+                                <Forms paramanent_cities={paramanent_cities} current_cities={current_cities} paramanent_states={paramanent_states} current_states={current_states}  handleChange={this.handleChange} formErrors={this.props.user.formError} user={this.props.user.user} />
                                 <Button variant="primary" type="submit">
                                     Submit
                                 </Button>

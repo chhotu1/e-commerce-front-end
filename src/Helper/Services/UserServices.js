@@ -9,9 +9,9 @@ const UserServices = {
         return axios.post(`register`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
     },
     edit: (payload,id) => {
-        let data = UserServices.toFormData(payload);
-        data.append('_method', 'PUT');
-        return axios.post(`user/${id}`, data, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
+        // let data = UserServices.toFormData(payload);
+        // data.append('_method', 'PUT');
+        return axios.put(`user/${id}`, payload, {headers: {token: Helper.StorageService.getAccessToken(), 'Content-Type': 'multipart/form-data'}});
     },
     showOne: (id) => {
         return axios.get(`user/${id}`, {headers: {token: Helper.StorageService.getAccessToken()}});

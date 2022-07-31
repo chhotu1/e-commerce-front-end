@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 import Helper from '../../../Helper';
 import Forms from './Forms';
-import storage from '../../../util/firebaseConfig';
+import storage from '../../../utils/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';

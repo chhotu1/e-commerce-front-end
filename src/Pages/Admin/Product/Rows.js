@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { deleteProduct } from '../../../Store/actions/ProductActions';
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import { deleteStorageImage } from '../../../util/FileStorage';
+import { deleteStorageImage } from '../../../utils/FileStorage';
 class Rows extends Component {
   constructor(props) {
     super(props);

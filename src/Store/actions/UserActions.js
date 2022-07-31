@@ -105,8 +105,7 @@ function editUser(payload, id, cb)
                 type: UserTypes.EDIT_USERS_SUCCESS,
                 data: response.data
             });
-
-            cb();
+            cb(response);
         }).catch(error => {
             dispatch({
                 type: UserTypes.EDIT_USERS_FAILURE,
