@@ -8,11 +8,18 @@ import {
   SidebarFooter,
   SidebarContent,
 } from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FaTachometerAlt, FaGem, FaGithub, FaRegLaughWink } from 'react-icons/fa';
 import sidebarBg from '../../Assets/images/bg2.jpg';
 import { Link } from 'react-router-dom';
 import Helper from '../../Helper'
-const Aside = ({ toggled, handleToggleSidebar }) => {
+import withRouter from '../shared/withRouter';
+const Aside = (props) => {
+  let { toggled, handleToggleSidebar } = props;
+  const handleLogout =()=>{
+    localStorage.clear();
+    const { navigate } = props.router;
+    navigate(Helper.RouteName.LOGIN);
+  }
   return (
     <ProSidebar
       image={sidebarBg}
@@ -85,6 +92,11 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
             </SubMenu>
           </SubMenu> */}
         </Menu>
+
+        <Menu iconShape="circle">
+          <MenuItem icon={<FaGem />} onClick={handleLogout}>Logout</MenuItem>
+        </Menu>
+
       </SidebarContent>
 
       <SidebarFooter style={{ textAlign: 'center' }}>
@@ -111,4 +123,4 @@ const Aside = ({ toggled, handleToggleSidebar }) => {
   );
 };
 
-export default Aside;
+export default withRouter(Aside);

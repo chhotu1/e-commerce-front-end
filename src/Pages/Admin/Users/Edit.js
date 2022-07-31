@@ -35,7 +35,36 @@ class Edit extends Component {
 
     componentDidMount() {
         this.props.setUserDefaults();
-        this.props.showUser(this.props.router.params.id);
+        let $this= this;
+        this.props.showUser(this.props.router.params.id,function (res) {
+            
+            if(res.data.status===true){
+                
+                let data = res.data.data;
+                let current_country= data.current_country;
+                let parmanent_country= data.parmanent_country;
+                if(current_country){
+                    let states = States.filter((e)=>e.country_id===current_country);
+                    $this.setState({current_states:states});
+                }
+                if(parmanent_country){
+                    let states = States.filter((e)=>e.country_id===parmanent_country);
+                    $this.setState({paramanent_states:states});
+                }
+
+                let current_state= data.current_state;
+                let parmanent_state= data.parmanent_state;
+                if(current_state){
+                    let cities = Cities.filter((e)=>e.state_id===current_state);
+                    $this.setState({current_cities:cities});
+                }
+                if(parmanent_state){
+                    let cities = Cities.filter((e)=>e.state_id===parmanent_state);
+                    $this.setState({paramanent_cities:cities});
+                }
+            }
+        });
+        
     }
 
     handleToggleSidebar(value) {
@@ -178,7 +207,7 @@ const mapDispatchToProps = (dispatch) => {
         setUserDefaults: () => dispatch(setUserDefaults()),
         addUser: (payload, cb) => dispatch(addUser(payload, cb)),
         editUser: (payload,id, cb) => dispatch(editUser(payload,id, cb)),
-        showUser: (id) => dispatch(showUser(id)),
+        showUser: (id,fun) => dispatch(showUser(id,fun)),
         
     }
 };

@@ -19,7 +19,10 @@ const RouteName = {
             ADD:'/admin/users/add',
             EDIT:'/admin/users/edit/',
         }
-    }
+    },
+    PROFILE_EDIT:'/admin/profile-edit',
+    PROFILE:'/admin/profile',
+    CHANGE_PASSWORD:'/admin/change-password',
 }
 
 export default RouteName

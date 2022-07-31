@@ -322,3 +322,36 @@ body {
     background: #ffd331;
   }
 }
+
+.top-menu{
+  background-color: #0e1e38;
+  #nav-dropdown{
+    color: #ffffff;
+  }
+}
+
+.profile-image-container{
+  text-align: center;
+  img{
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
+}
+.profile-content{
+    display: flex;
+    flex-wrap: wrap;
+  .label-name{
+    width: 30%;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .label-value{
+    width: 70%;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 0px;
+    margin-bottom: 3px;
+  }
+}

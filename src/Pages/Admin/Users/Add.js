@@ -11,7 +11,7 @@ import storage from '../../../utils/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';
-import {  setUserDefaults, checkUserValidation, handleUserChange,addUser } from '../../../Store/actions/UserActions';
+import {  setUserDefaults, checkUserValidation, handleUserChange,addUser,resetUserFields } from '../../../Store/actions/UserActions';
 import { CustomLoader } from '../../../Components/shared';
 import withRouter from '../../../Components/shared/withRouter';
 import States from '../../../staticData/states';
@@ -35,6 +35,7 @@ class Add extends Component {
     }
 
     componentDidMount() {
+        this.props.resetUserFields();
         this.props.setUserDefaults();
     }
 
@@ -174,6 +175,7 @@ const mapDispatchToProps = (dispatch) => {
         handleUserChange: (field, value) => dispatch(handleUserChange(field, value)),
         checkUserValidation: (value) => dispatch(checkUserValidation(value)),
         setUserDefaults: () => dispatch(setUserDefaults()),
+        resetUserFields: () => dispatch(resetUserFields()),
         addUser: (payload, cb) => dispatch(addUser(payload, cb)),
     }
 };

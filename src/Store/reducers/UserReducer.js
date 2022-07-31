@@ -4,7 +4,7 @@ const initialValue = {
     name: "",
     email: "",
     password: "",
-    role: 2,
+    role: "",
     date_of_birth: "",
     experience: "",
     specialist: "",
@@ -25,7 +25,7 @@ const initialValue = {
     other_phone: "",
     friend_phone: "",
     photo: "",
-    status: 1,
+    status: "",
     image_name:"",
     access_token: "",
     image_url:"",
@@ -159,13 +159,7 @@ const userReducer = function (state = initialState, action) {
         case UserTypes.RESET_USER_FIELDS:
             return {
                 ...state,
-                user: {
-                    id: "",
-                    name: "",
-                    email: "",
-                    password: "",
-                    is_admin: 0
-                }
+                user:initialValue
             };
         case UserTypes.HANDLE_USER_CHANGE:
             return handleChange(state, action);

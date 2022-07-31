@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaBars } from 'react-icons/fa';
 import { Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Helper from '../../Helper';
 const TopNav = ({ handleToggleSidebar }) => {
     return (
         <div>
@@ -9,21 +11,12 @@ const TopNav = ({ handleToggleSidebar }) => {
             </div>
             <div className='top-menu'>
                 <Nav className="justify-content-end" activeKey="/home">
-                    <Nav.Item>
-                        <Nav.Link href="/home">Active</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-1">Link</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-2">Link</Nav.Link>
-                    </Nav.Item>
-                    <NavDropdown title="Dropdown" id="nav-dropdown">
-                        <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
+                    <NavDropdown title="User" id="nav-dropdown">
+                        <NavDropdown.Item eventKey="4.1" as={Link} to={Helper.RouteName.PROFILE}>Profile</NavDropdown.Item>
+                        {/* <NavDropdown.Item eventKey="4.2" as={Link} to={Helper.RouteName.PROFILE}>View Profile</NavDropdown.Item> */}
+                        <NavDropdown.Item eventKey="4.3" as={Link} to={Helper.RouteName.CHANGE_PASSWORD}>Change Password</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
+                        <NavDropdown.Item eventKey="4.4">Setting</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
             </div>

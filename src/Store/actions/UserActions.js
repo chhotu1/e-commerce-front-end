@@ -66,7 +66,7 @@ function addUser (title, cb) {
 /**
  * show user action
  */
-function showUser(id)
+function showUser(id,fun)
 {
     return function (dispatch, getState) {
 
@@ -79,8 +79,9 @@ function showUser(id)
                 type: UserTypes.SHOW_USER_SUCCESS,
                 data: response.data
             });
-
+            fun(response)
         }).catch(error => {
+            console.log(error,'===============')
             dispatch({
                 type: UserTypes.SHOW_USER_FAILURE,
                 error: error.response.data
