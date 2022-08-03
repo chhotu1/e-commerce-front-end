@@ -23,6 +23,12 @@ const RouteName = {
     PROFILE_EDIT:'/admin/profile-edit',
     PROFILE:'/admin/profile',
     CHANGE_PASSWORD:'/admin/change-password',
+    LEAVE:{
+        MAIN:'/admin/leave',
+        ADD:'/admin/leave/add',
+        EDIT:'/admin/leave/edit/',
+    }
+
 }
 
 export default RouteName

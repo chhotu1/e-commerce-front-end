@@ -3,6 +3,7 @@ import RouteName from './../CustomRoutes/RouteName';
 import Regex from "./Regex";
 import Forms from "./Forms";
 import Images from "./Images";
+import Icons from "./Icons";
 import AuthServices from './Services/AuthServices';
 import UserServices from './Services/UserServices';
 import ProductServices from './Services/ProductServices';
@@ -18,7 +19,8 @@ const Helper ={
     UserServices,
     ProductServices,
     CategoryServices,
-    ApisUrl
+    ApisUrl,
+    Icons
 }
 
 export default Helper;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Aside from '../../Components/admin-app/Aside';
 import TopNav from '../../Components/admin-app/TopNav';
+import Notification from '../../Components/admin-app/dashboard/Notification';
 // import Sidebar from '../../Components/admin-app/Sidebar';
 // import Helper from './../../Helper'
 const Admin = () => {
@@ -16,6 +17,7 @@ const Admin = () => {
       />
       <div className='admin-content'>
         <TopNav handleToggleSidebar={handleToggleSidebar} />
+        <Notification/>
         <p>welcome</p>
       </div>
     </div>
