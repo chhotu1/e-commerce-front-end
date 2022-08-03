@@ -67,6 +67,22 @@ export default class Forms extends Component {
               {formErrors?.role ? (<div className="error">{formErrors?.role}</div>) : null}
             </Form.Group>
           </div>
+
+          <div className='col-md-6'>
+            <Form.Group className="mb-3">
+              <Form.Label>Designation</Form.Label>
+              <Form.Select aria-label="Select designation" name="designation" onChange={handleChange} value={user?.designation}>
+                <option>Select designation</option>
+                {Constant.DESIGNATION && Constant.DESIGNATION.map((item, index) => {
+                  return (
+                    <option value={item.value} key={index}>{item.name}</option>
+                  )
+                })}
+              </Form.Select>
+              {formErrors?.designation ? (<div className="error">{formErrors?.designation}</div>) : null}
+            </Form.Group>
+          </div>
+
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>Date of birth</Form.Label>
@@ -162,10 +178,15 @@ export default class Forms extends Component {
               {formErrors?.current_country ? (<div className="error">{formErrors?.current_country}</div>) : null}
             </Form.Group>
           </div>
+
+
+       
+
+
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>State</Form.Label>
-              <Form.Select aria-label="Select role" name="current_state" onChange={handleChange} value={user?.current_state}>
+              <Form.Select aria-label="Select state" name="current_state" onChange={handleChange} value={user?.current_state}>
                 <option>Select state</option>
                 {current_states && current_states.map((item, index) => {
                   return (
@@ -179,7 +200,7 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>City</Form.Label>
-              <Form.Select aria-label="Select role" name="current_city" onChange={handleChange} value={user?.current_city}>
+              <Form.Select aria-label="Select city" name="current_city" onChange={handleChange} value={user?.current_city}>
                 <option>Select city</option>
                 {current_cities && current_cities.map((item, index) => {
                   return (
@@ -212,7 +233,7 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>Country</Form.Label>
-              <Form.Select aria-label="Select role" name="parmanent_country" onChange={handleChange} value={user?.parmanent_country}>
+              <Form.Select aria-label="Select country" name="parmanent_country" onChange={handleChange} value={user?.parmanent_country}>
                 <option>Select Country</option>
                 {Countries && Countries.map((item, index) => {
                   return (
@@ -226,7 +247,7 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>State</Form.Label>
-              <Form.Select aria-label="Select role" name="parmanent_state" onChange={handleChange} value={user?.parmanent_state}>
+              <Form.Select aria-label="Select state" name="parmanent_state" onChange={handleChange} value={user?.parmanent_state}>
                 <option>Select state</option>
                 {paramanent_states && paramanent_states.map((item, index) => {
                   return (
@@ -240,7 +261,7 @@ export default class Forms extends Component {
           <div className='col-md-6'>
             <Form.Group className="mb-3">
               <Form.Label>City</Form.Label>
-              <Form.Select aria-label="Select role" name="parmanent_city" onChange={handleChange} value={user?.parmanent_city}>
+              <Form.Select aria-label="Select city" name="parmanent_city" onChange={handleChange} value={user?.parmanent_city}>
                 <option>Select city</option>
                 {paramanent_cities && paramanent_cities.map((item, index) => {
                   return (

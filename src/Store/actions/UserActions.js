@@ -90,6 +90,29 @@ function showUser(id,fun)
     }
 }
 
+function currentUser()
+{
+    return function (dispatch, getState) {
+
+        dispatch({
+            type: UserTypes.CURRENT_USER
+        });
+
+        UserServices.profile().then(response => {
+            dispatch({
+                type: UserTypes.CURRENT_USER_SUCCESS,
+                data: response.data
+            });
+            
+        }).catch(error => {
+            dispatch({
+                type: UserTypes.CURRENT_USER_FAILURE,
+                error: error.response.data
+            });
+        });
+    }
+}
+
 /**
  * edit user action
  */
@@ -224,5 +247,6 @@ export {
     editUser,
     deleteUser,
     handleUserChange,
-    resetUserFields
+    resetUserFields,
+    currentUser
 };

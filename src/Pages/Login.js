@@ -46,6 +46,7 @@ class Login extends Component {
       
       if(response.data.status===true){
         Helper.StorageService.setAccessToken(response.data.token)
+        Helper.StorageService.setUserRole(response.data.data.role)
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
           theme: "colored",

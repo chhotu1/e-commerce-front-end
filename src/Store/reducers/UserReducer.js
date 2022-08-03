@@ -26,9 +26,10 @@ const initialValue = {
     friend_phone: "",
     photo: "",
     status: "",
-    image_name:"",
+    image_name: "",
     access_token: "",
-    image_url:"",
+    image_url: "",
+    designation:""
 }
 
 const initialState = {
@@ -110,6 +111,25 @@ const userReducer = function (state = initialState, action) {
                 create_update_spinner: false,
                 error_message: action.error.message
             };
+
+        case UserTypes.CURRENT_USER:
+            return {
+                ...state,
+                create_update_spinner: true
+            };
+        case UserTypes.CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                create_update_spinner: false,
+                user: { ...action.data.data }
+            };
+        case UserTypes.CURRENT_USER_FAILURE:
+            return {
+                ...state,
+                create_update_spinner: false,
+                error_message: action.error.message
+            };
+
         case UserTypes.EDIT_USERS:
             return {
                 ...state,
@@ -159,7 +179,7 @@ const userReducer = function (state = initialState, action) {
         case UserTypes.RESET_USER_FIELDS:
             return {
                 ...state,
-                user:initialValue
+                user: initialValue
             };
         case UserTypes.HANDLE_USER_CHANGE:
             return handleChange(state, action);

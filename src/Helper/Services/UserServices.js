@@ -19,7 +19,9 @@ const UserServices = {
     remove: (id) => {
         return axios.delete(`user/${id}`, {headers: {token: Helper.StorageService.getAccessToken()}});
     },
-
+    profile: () => {
+        return axios.get(`user-profile`, {headers: {token: Helper.StorageService.getAccessToken()}});
+    },
     toFormData: (payload) => {
         const formData = new FormData();
         for (let key in payload) {

@@ -7,6 +7,7 @@ import AuthServices from './Services/AuthServices';
 import UserServices from './Services/UserServices';
 import ProductServices from './Services/ProductServices';
 import CategoryServices from './Services/CategoryServices';
+import ApisUrl from "./ApisUrl";
 const Helper ={
     StorageService,
     RouteName,
@@ -16,7 +17,8 @@ const Helper ={
     AuthServices,
     UserServices,
     ProductServices,
-    CategoryServices
+    CategoryServices,
+    ApisUrl
 }
 
 export default Helper;
