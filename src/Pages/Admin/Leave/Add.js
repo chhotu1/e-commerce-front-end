@@ -6,15 +6,20 @@ import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
 import Forms from './Forms'
+import {  setLeaveDefaults, checkLeaveValidation, handleLeaveChange,addLeave,resetLeaveFields } from '../../../Store/actions/LeaveActions';
+
 const Add = (props) => {
     const [toggled, setToggled] = useState(false);
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
     }
 
     return (
@@ -28,7 +33,7 @@ const Add = (props) => {
                 <div className='container'>
                     <CardContainer title="Add new leave" backLink={Helper.RouteName.LEAVE.MAIN}>
                         <Form onSubmit={handleSubmit}>
-                            <Forms />
+                            <Forms handleChange={handleChange} formErrors={props.leave.formError} leave={props.leave.leave}/>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
@@ -41,4 +46,20 @@ const Add = (props) => {
     )
 }
 
-export default Add
+const mapStateToProps = (state, ownProps) => {
+    return {
+        leave: state.leave
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleLeaveChange: (field, value) => dispatch(handleLeaveChange(field, value)),
+        checkLeaveValidation: (value) => dispatch(checkLeaveValidation(value)),
+        setLeaveDefaults: () => dispatch(setLeaveDefaults()),
+        resetLeaveFields: () => dispatch(resetLeaveFields()),
+        addLeave: (payload, cb) => dispatch(addLeave(payload, cb)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)((Add));

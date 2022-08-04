@@ -5,6 +5,8 @@ import Aside from '../../../Components/admin-app/Aside';
 import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
+import { listLeaves, setLeaveDefaults } from '../../../Store/actions/LeaveActions';
+
 const Leave = (props) => {
     const [toggled, setToggled] = useState(false);
     const handleToggleSidebar = (value) => {
@@ -47,4 +49,18 @@ const Leave = (props) => {
     )
 }
 
-export default Leave
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        leave: state.leave
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        listLeaves: () => dispatch(listLeaves()),
+        setLeaveDefaults: () => dispatch(setLeaveDefaults())
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Leave);

@@ -104,12 +104,29 @@ const Forms = {
         else if (!Regex.FULL_NAME_REGEX.test(value))
           return "Name should be text";
         else return "";
-        case "role":
-          if (!value) return "The role field is required";
-          else return "";
-          case "status":
-          if (!value) return "The status field is required";
-          else return "";
+      case "role":
+        if (!value) return "The role field is required";
+        else return "";
+      case "status":
+        if (!value) return "The status field is required";
+        else return "";
+      default:
+        return "";
+    }
+  },
+  leaveForm: (name, value) => {
+    switch (name) {
+      case "title":
+        if (!value) return "The title field is required";
+      case "start_date":
+        if (!value) return "The start_date field is required";
+        else return "";
+      case "end_date":
+        if (!value) return "The end_date field is required";
+        else return "";
+      case "leave_type":
+        if (!value) return "The leave_type field is required";
+        else return "";
       default:
         return "";
     }
