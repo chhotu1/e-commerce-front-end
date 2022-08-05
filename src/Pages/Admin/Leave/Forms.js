@@ -1,8 +1,11 @@
 import React from 'react'
 import { Form } from 'react-bootstrap';
+import Helper from '../../../Helper';
+import Constant from '../../../utils/Constant';
 
 const Forms = (props) => {
   const { formErrors, handleChange, leave } = props;
+  const role =Helper.StorageService.getUserRole();
   return (
     <div>
       <div className='row'>
@@ -49,6 +52,20 @@ const Forms = (props) => {
            {formErrors?.description ? (<div className="error">{formErrors?.description}</div>) : null}
           </Form.Group>
         </div>
+        {
+         parseInt(role)===Constant.ADMIN || parseInt(role)===Constant.HR_MANEGER?<div className='col-md-6'>
+          <Form.Group className="mb-3">
+            <Form.Label>Select status</Form.Label><Form.Label className='error'>*</Form.Label>
+            <Form.Select aria-label="Default select example" name="status" onChange={handleChange} value={leave?.status}>
+              <option>Select status</option>
+              <option value={1}>Confirm</option>
+              <option value={2}>Deactive</option>
+            </Form.Select>
+           {formErrors?.leave_type ? (<div className="error">{formErrors?.leave_type}</div>) : null}
+
+          </Form.Group>
+        </div>:''
+        }
       </div>
     </div>
   )

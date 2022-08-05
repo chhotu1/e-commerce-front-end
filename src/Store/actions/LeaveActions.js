@@ -63,7 +63,7 @@ function addLeave (title, cb) {
 /**
  * show LEAVE action
  */
-function showLeave(id,fun)
+function showLeave(id)
 {
     return function (dispatch, getState) {
 
@@ -76,7 +76,7 @@ function showLeave(id,fun)
                 type: LeaveTypes.SHOW_LEAVE_SUCCESS,
                 data: response.data
             });
-            fun(response)
+            // fun(response)
         }).catch(error => {
             dispatch({
                 type: LeaveTypes.SHOW_LEAVE_FAILURE,

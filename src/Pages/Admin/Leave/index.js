@@ -6,12 +6,21 @@ import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
 import { listLeaves, setLeaveDefaults } from '../../../Store/actions/LeaveActions';
+import Rows from './Rows';
+import { CustomLoader } from '../../../Components/shared';
 
 const Leave = (props) => {
     const [toggled, setToggled] = useState(false);
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
+
+    useEffect(() => {
+        props.setLeaveDefaults();
+        props.listLeaves();
+    }, [])
+
+    const leaves = props.leave.leaves;
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
             <Aside
@@ -21,6 +30,8 @@ const Leave = (props) => {
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
                 <div className='container'>
+                {props.leave.list_spinner?<CustomLoader/>:''}
+
                     <CardContainer title="Leave list" link={Helper.RouteName.LEAVE.ADD} linkTitle="New Leave">
 
                         <Table striped bordered hover responsive>
@@ -37,8 +48,11 @@ const Leave = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-
-
+                                {
+                                    leaves ? (
+                                        leaves.map((item, index) => <Rows key={item._id} leave={item} index={index} />)
+                                    ) : null
+                                }
                             </tbody>
                         </Table>
                     </CardContainer>

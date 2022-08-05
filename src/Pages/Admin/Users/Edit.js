@@ -9,7 +9,6 @@ import Helper from '../../../Helper';
 import Forms from './Forms';
 import storage from '../../../utils/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-// import { fileStorage } from '../../../util/FileStorage';
 import { connect } from 'react-redux';
 import {  setUserDefaults, checkUserValidation, handleUserChange,addUser,showUser,editUser } from '../../../Store/actions/UserActions';
 import { CustomLoader } from '../../../Components/shared';
