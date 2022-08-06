@@ -27,6 +27,11 @@ const RouteName = {
         MAIN:'/admin/leave',
         ADD:'/admin/leave/add',
         EDIT:'/admin/leave/edit/',
+    },
+    NOTIFICATION:{
+        MAIN:'/admin/notification',
+        ADD:'/admin/notification/add',
+        EDIT:'/admin/notification/edit/',
     }
 
 }

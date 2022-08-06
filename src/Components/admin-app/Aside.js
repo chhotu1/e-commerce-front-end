@@ -53,10 +53,17 @@ const Aside = (props) => {
           >
             <Link to="/admin">Dashboard</Link>
           </MenuItem>
-          {user?.role === Constant.ADMIN || user?.role === Constant.HR_MANEGER ?
-            <MenuItem icon={<FaGem />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem> : ''}
-
         </Menu>
+        {user?.role === Constant.ADMIN || user?.role === Constant.HR_MANEGER ?
+        <Menu iconShape="circle">
+        <SubMenu
+            title="Admin"
+            icon={<FaRegLaughWink />}
+          >
+             <MenuItem icon={<FaGem />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem>
+            <MenuItem icon={<FaGem />}> <Link to={Helper.RouteName.NOTIFICATION.MAIN}>Notification</Link></MenuItem>
+          </SubMenu>
+        </Menu>: ''}
         <Menu iconShape="circle">
         <SubMenu
             title="General"

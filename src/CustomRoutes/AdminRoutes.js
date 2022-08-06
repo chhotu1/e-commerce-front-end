@@ -17,6 +17,11 @@ import Leave from '../Pages/Admin/Leave';
 import LeaveAdd from '../Pages/Admin/Leave/Add';
 import LeaveEdit from '../Pages/Admin/Leave/Edit';
 
+//leave
+import Notification from '../Pages/Admin/Notification';
+import NotificationAdd from '../Pages/Admin/Notification/Add';
+import NotificationEdit from '../Pages/Admin/Notification/Edit';
+
 import RouteName from './RouteName';
 // import Sidebar from '../Components/admin-app/Sidebar';
 import ProtectedRoutes from './ProtectedRoutes';
@@ -56,6 +61,11 @@ const AdminRoutes = (props) => {
             <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
             <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
             <Route path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
+
+            <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
+            <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
+            <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
+            
           </Route>
         </Route>
 

@@ -131,6 +131,14 @@ const Forms = {
         return "";
     }
   },
+  notificationForm: (name, value) => {
+    switch (name) {
+      case "title":
+        if (!value) return "The title field is required";
+      default:
+        return "";
+    }
+  },
 
 };
 export default Forms;
