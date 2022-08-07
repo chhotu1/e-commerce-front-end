@@ -30,7 +30,7 @@ const Aside = (props) => {
   useEffect(() => {
     props.currentUser();
   }, [])
-  const user = props?.user?.user;
+  const user = props?.user?.current_user;
 
   return (
     <ProSidebar

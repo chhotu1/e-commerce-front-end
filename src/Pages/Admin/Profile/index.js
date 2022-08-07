@@ -14,7 +14,7 @@ const Profle = (props) => {
     useEffect(()=>{
         props.currentUser();
     },[])
-    const user = props.user.user;
+    const user = props.user.current_user;
     
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
@@ -29,7 +29,7 @@ const Profle = (props) => {
                         <div className='row'>
                             <div className='col-md-3'>
                                 <div className='profile-image-container'>
-                                    <img alt='' src={props.user.user?.image_url?props.user.user?.image_url:Helper.Images.user2}/>
+                                    <img alt='' src={user?.image_url?user?.image_url:Helper.Images.user2}/>
                                     <p>Chhotu sow</p>
                                     <label>Software developer</label>
                                 </div>
@@ -37,13 +37,13 @@ const Profle = (props) => {
                             <div className='col-md-9'>
                                 <div className='profile-content'>
                                     <label className='label-name'>Name : </label>
-                                    <p className='label-value'>{props.user.user?.name}</p>
+                                    <p className='label-value'>{user?.name}</p>
                                     <label className='label-name'>Email : </label>
-                                    <p className='label-value'>{props.user.user?.email}</p>
+                                    <p className='label-value'>{user?.email}</p>
                                     <label className='label-name'>Phone : </label>
-                                    <p className='label-value'>{props.user.user?.phone} {user?.other_phone?<>({user?.other_phone})</>:''}</p>
+                                    <p className='label-value'>{user?.phone} {user?.other_phone?<>({user?.other_phone})</>:''}</p>
                                     <label className='label-name'>Address : </label>
-                                    <p className='label-value'>{props.user.user?.address}</p>
+                                    <p className='label-value'>{user?.address}</p>
 
                                     <label className='label-name'>Date of birth : </label>
                                     <p className='label-value'>{user?.date_of_birth}</p>

@@ -35,6 +35,7 @@ const initialValue = {
 const initialState = {
     users: [],
     user: initialValue,
+    current_user: initialValue,
     formError: initialValue,
     success_message: "",
     error_message: "",
@@ -121,7 +122,7 @@ const userReducer = function (state = initialState, action) {
             return {
                 ...state,
                 create_update_spinner: false,
-                user: { ...action.data.data }
+                current_user: { ...action.data.data }
             };
         case UserTypes.CURRENT_USER_FAILURE:
             return {

@@ -39,7 +39,7 @@ const AdminRoutes = (props) => {
       props.currentUser();
     }
   }, [])
-  const user = props?.user?.user;
+  const user = props?.user?.current_user;
 
     return (
       <>
@@ -58,12 +58,12 @@ const AdminRoutes = (props) => {
             <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
 
 
-            <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
-            <Route path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
+           
             {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
             <Route element={<ManagementRoutes role={user?.role} />}>
               <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
-
+              <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
+            <Route path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
               <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
               <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
               <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
