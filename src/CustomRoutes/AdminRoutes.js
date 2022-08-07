@@ -40,40 +40,43 @@ const AdminRoutes = (props) => {
     }
   }, [])
   const user = props?.user?.user;
-  return (
-    <>
-      <Routes>
-        <Route element={<ProtectedRoutes isLoggedIn={token} />}>
-          <Route exact={true} path={RouteName.ADMIN.MAIN} element={<Admin />} />
-          <Route exact={true} path={RouteName.ADMIN.CATEGORY.MAIN} element={<Category />} />
-          <Route path={RouteName.ADMIN.CATEGORY.ADD} element={<CategoryAdd />} />
-          <Route exact={true} path={RouteName.ADMIN.PRODUCT.MAIN} element={<Product />} />
-          <Route path={RouteName.ADMIN.PRODUCT.ADD} element={<ProductAdd />} />
-          <Route exact={true} path={RouteName.PROFILE} element={<Profle />} />
-          <Route exact={true} path={RouteName.CHANGE_PASSWORD} element={<ChangePassword />} />
 
-          <Route exact={true} path={RouteName.LEAVE.MAIN} element={<Leave />} />
-          <Route path={RouteName.LEAVE.ADD} element={<LeaveAdd />} />
-          <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
+    return (
+      <>
+        <Routes>
+          <Route element={<ProtectedRoutes isLoggedIn={token} />}>
+            <Route exact={true} path={RouteName.ADMIN.MAIN} element={<Admin />} />
+            <Route exact={true} path={RouteName.ADMIN.CATEGORY.MAIN} element={<Category />} />
+            <Route path={RouteName.ADMIN.CATEGORY.ADD} element={<CategoryAdd />} />
+            <Route exact={true} path={RouteName.ADMIN.PRODUCT.MAIN} element={<Product />} />
+            <Route path={RouteName.ADMIN.PRODUCT.ADD} element={<ProductAdd />} />
+            <Route exact={true} path={RouteName.PROFILE} element={<Profle />} />
+            <Route exact={true} path={RouteName.CHANGE_PASSWORD} element={<ChangePassword />} />
 
-          {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
-          <Route element={<ManagementRoutes role={user?.role} />}>
-            <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
+            <Route exact={true} path={RouteName.LEAVE.MAIN} element={<Leave />} />
+            <Route path={RouteName.LEAVE.ADD} element={<LeaveAdd />} />
+            <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
+
+
             <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
             <Route path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
+            {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
+            <Route element={<ManagementRoutes role={user?.role} />}>
+              <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
 
-            <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
-            <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
-            <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
-            
+              <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
+              <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
+              <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
+
+            </Route>
           </Route>
-        </Route>
 
 
-      </Routes>
-    </>
-  )
-}
+        </Routes>
+      </>
+    )
+  }
+
 
 
 

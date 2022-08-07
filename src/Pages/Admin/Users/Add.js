@@ -35,8 +35,9 @@ class Add extends Component {
     }
 
     componentDidMount() {
-        this.props.resetUserFields();
+        
         this.props.setUserDefaults();
+        this.props.resetUserFields();
     }
 
     handleToggleSidebar(value) {
@@ -72,6 +73,7 @@ class Add extends Component {
     }
 
     handleChange(event) {
+        event.preventDefault();
         const { name, value } = event.target;
         if (name === 'photo') {
             this.setState({ file: event.target.files[0] })
