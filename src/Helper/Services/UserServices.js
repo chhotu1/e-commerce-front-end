@@ -22,6 +22,11 @@ const UserServices = {
     profile: () => {
         return axios.get(`user-profile`, {headers: {token: Helper.StorageService.getAccessToken()}});
     },
+    changePassword: (payload) => {
+        return axios.post(`change-password`, payload, {headers: {token: Helper.StorageService.getAccessToken()}});
+    },
+
+    
     toFormData: (payload) => {
         const formData = new FormData();
         for (let key in payload) {

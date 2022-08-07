@@ -105,6 +105,7 @@ function currentUser()
             });
             
         }).catch(error => {
+            console.log(error,'----------------------')
             dispatch({
                 type: UserTypes.CURRENT_USER_FAILURE,
                 error: error.response.data
