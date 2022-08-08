@@ -16,11 +16,14 @@ import UsersEdit from '../Pages/Admin/Users/Edit';
 import Leave from '../Pages/Admin/Leave';
 import LeaveAdd from '../Pages/Admin/Leave/Add';
 import LeaveEdit from '../Pages/Admin/Leave/Edit';
-
 //leave
 import Notification from '../Pages/Admin/Notification';
 import NotificationAdd from '../Pages/Admin/Notification/Add';
 import NotificationEdit from '../Pages/Admin/Notification/Edit';
+//Attendance
+import Attendance from '../Pages/Admin/Attendance';
+import AttendanceAdd from '../Pages/Admin/Attendance/Add';
+import AttendanceEdit from '../Pages/Admin/Attendance/Edit';
 
 import RouteName from './RouteName';
 // import Sidebar from '../Components/admin-app/Sidebar';
@@ -41,41 +44,45 @@ const AdminRoutes = (props) => {
   }, [])
   const user = props?.user?.current_user;
 
-    return (
-      <>
-        <Routes>
-          <Route element={<ProtectedRoutes isLoggedIn={token} />}>
-            <Route exact={true} path={RouteName.ADMIN.MAIN} element={<Admin />} />
-            <Route exact={true} path={RouteName.ADMIN.CATEGORY.MAIN} element={<Category />} />
-            <Route path={RouteName.ADMIN.CATEGORY.ADD} element={<CategoryAdd />} />
-            <Route exact={true} path={RouteName.ADMIN.PRODUCT.MAIN} element={<Product />} />
-            <Route path={RouteName.ADMIN.PRODUCT.ADD} element={<ProductAdd />} />
-            <Route exact={true} path={RouteName.PROFILE} element={<Profle />} />
-            <Route exact={true} path={RouteName.CHANGE_PASSWORD} element={<ChangePassword />} />
+  return (
+    <>
+      <Routes>
+        <Route element={<ProtectedRoutes isLoggedIn={token} />}>
+          <Route exact={true} path={RouteName.ADMIN.MAIN} element={<Admin />} />
+          <Route exact={true} path={RouteName.ADMIN.CATEGORY.MAIN} element={<Category />} />
+          <Route path={RouteName.ADMIN.CATEGORY.ADD} element={<CategoryAdd />} />
+          <Route exact={true} path={RouteName.ADMIN.PRODUCT.MAIN} element={<Product />} />
+          <Route path={RouteName.ADMIN.PRODUCT.ADD} element={<ProductAdd />} />
+          <Route exact={true} path={RouteName.PROFILE} element={<Profle />} />
+          <Route exact={true} path={RouteName.CHANGE_PASSWORD} element={<ChangePassword />} />
 
-            <Route exact={true} path={RouteName.LEAVE.MAIN} element={<Leave />} />
-            <Route path={RouteName.LEAVE.ADD} element={<LeaveAdd />} />
-            <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
+          <Route exact={true} path={RouteName.LEAVE.MAIN} element={<Leave />} />
+          <Route path={RouteName.LEAVE.ADD} element={<LeaveAdd />} />
+          <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
 
 
-           
-            {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
-            <Route element={<ManagementRoutes role={user?.role} />}>
-              <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
-              <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
+
+          {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
+          <Route element={<ManagementRoutes role={user?.role} />}>
+            <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
+            <Route path={RouteName.ADMIN.USER.ADD} element={<UsersAdd />} />
             <Route path={`${RouteName.ADMIN.USER.EDIT}:id`} element={<UsersEdit />} />
-              <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
-              <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
-              <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
+            <Route exact={true} path={RouteName.NOTIFICATION.MAIN} element={<Notification />} />
+            <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
+            <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
 
-            </Route>
+            <Route exact={true} path={RouteName.ATTENDENCE.MAIN} element={<Attendance />} />
+            <Route path={RouteName.ATTENDENCE.ADD} element={<AttendanceAdd />} />
+            <Route path={`${RouteName.ATTENDENCE.EDIT}:id`} element={<AttendanceEdit />} />
+
           </Route>
+        </Route>
 
 
-        </Routes>
-      </>
-    )
-  }
+      </Routes>
+    </>
+  )
+}
 
 
 

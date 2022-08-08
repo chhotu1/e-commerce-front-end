@@ -8,7 +8,7 @@ const Box = () => {
     const DashboardMenu = [
         { id: 2, count: 20, title: 'Leave', url: Helper.RouteName.LEAVE.MAIN, color: 'info', icon: <FaUserFriends /> },
         { id: 3, count: 120, title: 'Holidays', url: Helper.RouteName.ADMIN, color: 'success', icon: <FaCalendarAlt /> },
-        { id: 4, count: 10, title: 'Birthday wises', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
+        { id: 4, count: 10, title: 'Birthday wishes', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
     ];
     return (
         <div className='dashboard-content p-4'>

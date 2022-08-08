@@ -32,8 +32,13 @@ const RouteName = {
         MAIN:'/admin/notification',
         ADD:'/admin/notification/add',
         EDIT:'/admin/notification/edit/',
+    },
+    ATTENDENCE:{
+        MAIN:'/admin/attendance',
+        ADD:'/admin/attendance/add',
+        EDIT:'/admin/attendance/edit/',
     }
-
+    
 }
 
 export default RouteName

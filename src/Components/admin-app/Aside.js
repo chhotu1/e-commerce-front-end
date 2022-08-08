@@ -10,8 +10,8 @@ import {
   SidebarContent,
 } from 'react-pro-sidebar';
 import {
-  FaTachometerAlt, FaGem, FaGithub,
-   FaRegLaughWink
+   FaGithub,FaTh,
+   FaRegLaughWink,FaUserFriends,FaSignOutAlt,FaUserAlt,FaFacebookMessenger,FaCalendarAlt,FaUsers
 } from 'react-icons/fa';
 import sidebarBg from '../../Assets/images/bg2.jpg';
 import { Link } from 'react-router-dom';
@@ -48,7 +48,7 @@ const Aside = (props) => {
       <SidebarContent>
         <Menu iconShape="circle">
           <MenuItem
-            icon={<FaTachometerAlt />}
+            icon={<FaTh />}
             suffix={<span className="badge red">New</span>}
           >
             <Link to="/admin">Dashboard</Link>
@@ -58,10 +58,11 @@ const Aside = (props) => {
         <Menu iconShape="circle">
         <SubMenu
             title="Admin"
-            icon={<FaRegLaughWink />}
+            icon={<FaUserAlt />}
           >
-             <MenuItem icon={<FaGem />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem>
-            <MenuItem icon={<FaGem />}> <Link to={Helper.RouteName.NOTIFICATION.MAIN}>Notification</Link></MenuItem>
+             <MenuItem icon={<FaUserFriends />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem>
+            <MenuItem icon={<FaFacebookMessenger />}> <Link to={Helper.RouteName.NOTIFICATION.MAIN}>Notification</Link></MenuItem>
+            <MenuItem icon={<FaUsers />}> <Link to={Helper.RouteName.ATTENDENCE.MAIN}>Attendance</Link></MenuItem>
           </SubMenu>
         </Menu>: ''}
         <Menu iconShape="circle">
@@ -69,7 +70,7 @@ const Aside = (props) => {
             title="General"
             icon={<FaRegLaughWink />}
           >
-            <MenuItem> <Link to={Helper.RouteName.LEAVE.MAIN}>Leave</Link></MenuItem>
+            <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.LEAVE.MAIN}>Leave</Link></MenuItem>
           </SubMenu>
           {/* <SubMenu
             title="Category"
@@ -88,7 +89,7 @@ const Aside = (props) => {
         </Menu>
 
         <Menu iconShape="circle">
-          <MenuItem icon={<FaGem />} onClick={handleLogout}>Logout</MenuItem>
+          <MenuItem icon={<FaSignOutAlt />} onClick={handleLogout}>Logout</MenuItem>
         </Menu>
 
       </SidebarContent>
