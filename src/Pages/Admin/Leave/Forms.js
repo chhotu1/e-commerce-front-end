@@ -30,8 +30,9 @@ const Forms = (props) => {
             <Form.Label>Select leave type</Form.Label><Form.Label className='error'>*</Form.Label>
             <Form.Select aria-label="Default select example" name="leave_type" onChange={handleChange} value={leave?.leave_type}>
               <option>Select leave type</option>
-              <option value="1">Half day</option>
-              <option value="2">Full day</option>
+              <option value={1}>Causual leave</option>
+              <option value={2}>Sick leave</option>
+              <option value={3}>Loss of pay</option>
             </Form.Select>
            {formErrors?.leave_type ? (<div className="error">{formErrors?.leave_type}</div>) : null}
 

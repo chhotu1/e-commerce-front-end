@@ -32,7 +32,7 @@ const Leave = (props) => {
                 <div className='container'>
                 {props.leave.list_spinner?<CustomLoader/>:''}
 
-                    <CardContainer title="Leave list" link={Helper.RouteName.LEAVE.ADD} linkTitle="New Leave">
+                    <CardContainer title="Leave list" link={Helper.RouteName.LEAVE.ADD} linkTitle="Apply Leave">
 
                         <Table striped bordered hover responsive>
                             <thead>

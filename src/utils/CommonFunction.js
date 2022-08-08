@@ -81,9 +81,17 @@ function getRoleName (role){
     }else{
         return 0
     }
-
 }
 
-export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader,getRoleName };
+function getLeaveType (type){
+    let index = Constant.LEAVETYPE.findIndex((item)=>item.value===parseInt(type));
+    if(index !==-1){
+        return Constant.LEAVETYPE[index].name;
+    }else{
+        return ''
+    }
+}
+
+export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader,getRoleName,getLeaveType };
 
 // export default Common;

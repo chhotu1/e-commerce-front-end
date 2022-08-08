@@ -14,6 +14,12 @@ const ROLE = [
     { name: 'TL', value: 4 },
 ]
 
+const LEAVETYPE = [
+    { name: 'Causual leave', value: 1 },
+    { name: 'Sick leave', value: 2 },
+    { name: 'Loss of pay', value: 3 },
+]
+
 const DESIGNATION = [
     { name: 'SEO', value: ADMIN },
     { name: 'HR Manager', value: HR_MANEGER },
@@ -27,7 +33,8 @@ const Constant = {
     DESIGNATION,
     ADMIN,
     HR_MANEGER,
-    SR_DEVELOPER,JUNIOR_DEVELOPER
+    SR_DEVELOPER,JUNIOR_DEVELOPER,
+    LEAVETYPE
 }
 
 export default Constant;

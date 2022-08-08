@@ -5,6 +5,7 @@ import { deleteLeave } from '../../../Store/actions/LeaveActions';
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import Helper from '../../../Helper';
+import { getLeaveType } from '../../../utils/CommonFunction';
 
 const Rows = (props) => {
   const { leave, index } = props;
@@ -31,7 +32,7 @@ const Rows = (props) => {
       <td>{leave?.start_date}</td>
       <td>{leave?.end_date}</td>
       <td>{leave?.title}</td>
-      <td>{leave?.leave_type}</td>
+      <td>{getLeaveType(leave?.leave_type)}</td>
       
       <td>{leave?.status === 1 ? 'Active' : 'Deactive'}</td>
       <td>{leave?.created_by?.name}</td>
