@@ -7,6 +7,7 @@ const Notification = (props) => {
     const style = {
         background: '#128508',
         color: '#ffffff',
+        width:'90%'
     };
 
     useEffect(() => {

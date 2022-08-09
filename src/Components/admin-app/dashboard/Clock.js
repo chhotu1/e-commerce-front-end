@@ -1,111 +1,42 @@
-import React from "react";
-class Clock extends React.Component {
-    format(time) {
-        let seconds = time % 60;
-        let minutes = Math.floor(time / 60);
-        minutes = minutes.toString().length === 1 ? "0" + minutes : minutes;
-        seconds = seconds.toString().length === 1 ? "0" + seconds : seconds;
-        return minutes + ':' + seconds;
-    }
-    render() {
-        const { time } = this.props;
-        return (
-            <div className="displayedTime">
-                <h1>{this.format(time)}</h1>
-            </div>
-        )
-    }
-}
+import React, { useState, useEffect } from 'react'
+const Clock = () => {
+    const [currentCount, setCount] = useState(1);
+    const [isStartTimer, setStartTimer] = useState(false)
+    const timer = () => setCount(currentCount + 1);
 
-class Input extends React.Component {
-
-    onSubmit(event) {
-        event.preventDefault();
-        // const strSeconds = this.refs.seconds.value;
-        // if (strSeconds.match(/[0-9]/)) {
-        //     this.refs.seconds.value = '';
-            this.props.onSetCountdown(parseInt(600, 10));
-        //}
-    }
-
-    render() {
-        return (
-            <form ref="form" onSubmit={this.onSubmit.bind(this)}>
-                {/* <input type="text" ref="seconds" placeholder="enter time in seconds" /> */}
-                <input type="submit" value="Start"></input>
-            </form>
-        )
-    }
-}
-
-class Button extends React.Component {
-    render() {
-        return (
-            <button onClick={this.props.onClickHandler}>{this.props.label}</button>
-        );
-    }
-}
-
-class ClockApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            count: 0,
-            running: false,
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (this.state.running !== prevState.running) {
-            switch (this.state.running) {
-                case true:
-                    this.handleStart();
+    useEffect(() => {
+        if (isStartTimer) {
+            if (currentCount <= 0) {
+                return;
             }
+            const id = setInterval(timer, 1000);
+            return () => clearInterval(id);
         }
+
+    },
+        [currentCount, isStartTimer]
+    );
+
+    function convertHMS(value) {
+        const sec = parseInt(value, 10); // convert value to number if it's string
+        let hours = Math.floor(sec / 3600); // get hours
+        let minutes = Math.floor((sec - (hours * 3600)) / 60); // get minutes
+        let seconds = sec - (hours * 3600) - (minutes * 60); //  get seconds
+        if (hours < 10) { hours = "0" + hours; }
+        if (minutes < 10) { minutes = "0" + minutes; }
+        if (seconds < 10) { seconds = "0" + seconds; }
+        return hours + ':' + minutes + ':' + seconds;
     }
 
-    handleStart() {
-        this.timer = setInterval(() => {
-            const newCount = this.state.count - 1;
-            this.setState(
-                { count: newCount >= 0 ? newCount : 0 }
-            );
-        }, 1000);
+    const start = () => {
+        setStartTimer(!isStartTimer)
     }
 
-    handleStop() {
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.setState(
-                { running: false }
-            );
-        }
-    }
-
-    handleReset() {
-        this.setState(
-            { count: 0 }
-        );
-    }
-
-    handleCountdown(seconds) {
-        this.setState({
-            count: seconds,
-            running: true
-        })
-    }
-
-    render() {
-        const { count } = this.state;
-        return (
-            <div className="container">
-                <Clock time={count} />
-                <Input onSetCountdown={this.handleCountdown.bind(this)} />
-                <Button label="stop" onClickHandler={this.handleStop.bind(this)} />
-                <Button label="reset" onClickHandler={this.handleReset.bind(this)} />
-            </div>
-        )
-    }
+    return (
+        <div className='clock-container'>
+            <button onClick={start} className={isStartTimer?'clock-btn stop':'clock-btn start'} type="button">{convertHMS(currentCount)}</button>
+        </div>
+    )
 }
 
-export default ClockApp;
+export default Clock
