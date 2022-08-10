@@ -265,9 +265,6 @@ body {
         }
       }
     }
-    .clock-notification{
-      display: flex;
-    }
   }
 
   .social-bagdes {
@@ -473,10 +470,10 @@ body {
     font-size: 19px;
     font-weight: 900;
   }
-  .stop{
-    background-color: #ce0f0f;
-  }
-  .start{
-    background-color: #128508;
-  }
+}
+.stop{
+  background-color: #ce0f0f;
+}
+.start{
+  background-color: #128508;
 }

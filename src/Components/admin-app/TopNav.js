@@ -1,9 +1,12 @@
 import React from 'react'
 import { FaBars } from 'react-icons/fa';
-import { Nav, NavDropdown } from 'react-bootstrap';
+import { Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Helper from '../../Helper';
+import Clock from './dashboard/Clock';
+
 const TopNav = ({ handleToggleSidebar }) => {
+    const isTimer = Helper.StorageService.getIsClockTimer();
     return (
         <div>
             <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
@@ -18,6 +21,9 @@ const TopNav = ({ handleToggleSidebar }) => {
                         <NavDropdown.Divider />
                         <NavDropdown.Item eventKey="4.4">Setting</NavDropdown.Item>
                     </NavDropdown>
+                    <Nav.Item as="li" className={isTimer==='true'?'stop':'start'}>
+                        <Clock/>
+                    </Nav.Item>
                 </Nav>
             </div>
         </div>

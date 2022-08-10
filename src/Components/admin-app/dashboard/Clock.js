@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Helper from '../../../Helper';
 const Clock = () => {
     const [currentCount, setCount] = useState(1);
     const [isStartTimer, setStartTimer] = useState(false)
@@ -6,16 +7,26 @@ const Clock = () => {
 
     useEffect(() => {
         if (isStartTimer) {
+            Helper.StorageService.setClockTimer(currentCount);
+            Helper.StorageService.setIsClockTimer('true');
             if (currentCount <= 0) {
                 return;
             }
             const id = setInterval(timer, 1000);
             return () => clearInterval(id);
         }
+    },[currentCount, isStartTimer]);
 
-    },
-        [currentCount, isStartTimer]
-    );
+    useEffect(()=>{
+        let cTimer = Helper.StorageService.getClockTimer();
+        let isCtimer = Helper.StorageService.getIsClockTimer();
+        if(cTimer && isCtimer && cTimer!==null && isCtimer!==null){
+            if(isStartTimer===false){
+                setCount(parseInt(cTimer))
+            }
+            setStartTimer(true);
+        }
+    },[])
 
     function convertHMS(value) {
         const sec = parseInt(value, 10); // convert value to number if it's string
@@ -27,6 +38,21 @@ const Clock = () => {
         if (seconds < 10) { seconds = "0" + seconds; }
         return hours + ':' + minutes + ':' + seconds;
     }
+
+    useEffect(()=>{
+        //Wed Aug 10 2022 07:22:03 GMT+0530 (India Standard Time)
+        var start = new Date('Wed Aug 10 2022 07:38:24 GMT+0530 (India Standard Time)');
+        // console.log(start.getSeconds(),'===============')
+        const today = new Date();
+        // console.log(today,'===============')
+        // const endDate = new Date(startDate.setDate(startDate.getDate() + 7));
+        // const days = parseInt((endDate - today) / (1000 * 60 * 60 * 24));
+        // const hours = parseInt(Math.abs(endDate - today) / (1000 * 60 * 60) % 24);
+        const minutes = parseInt(Math.abs(today.getTime() - start.getTime()) / (1000 * 60) % 60);
+        const seconds = parseInt(Math.abs(today.getTime() - start.getTime()) / (1000) % 60);
+        console.log(minutes,'minute',minutes*60,'ssssssssssssssssssss',seconds)
+
+    },[])
 
     const start = () => {
         setStartTimer(!isStartTimer)

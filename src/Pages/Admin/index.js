@@ -12,6 +12,7 @@ const Admin = () => {
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
+
   return (
     <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
       <Aside
@@ -20,11 +21,7 @@ const Admin = () => {
       />
       <div className='admin-content'>
         <TopNav handleToggleSidebar={handleToggleSidebar} />
-        <div className='clock-notification'>
         <Notification />
-        <Clock/>
-        </div>
-        
         <Box/>
       </div>
     </div>

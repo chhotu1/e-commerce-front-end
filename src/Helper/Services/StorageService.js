@@ -20,6 +20,24 @@ const StorageService ={
     removeUserRole:() =>{
         localStorage.removeItem('UserRole');
     },
+    setClockTimer:(value) =>{
+        localStorage.setItem('ClockTimer',value);
+    },
+    getClockTimer:() =>{
+        return localStorage.getItem('ClockTimer');
+    },
+    removeClockTimer:() =>{
+        localStorage.removeItem('ClockTimer');
+    },
+    setIsClockTimer:(value) =>{
+        localStorage.setItem('IsClockTimer',value);
+    },
+    getIsClockTimer:() =>{
+        return localStorage.getItem('IsClockTimer');
+    },
+    removeIsClockTimer:() =>{
+        localStorage.removeItem('IsClockTimer');
+    },
 }
 
 export default StorageService;
