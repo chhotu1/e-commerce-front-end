@@ -24,6 +24,29 @@ function formateDate(date) {
     return `${month} ${day} ${year}`;
 }
 
+function timerDateFormate(date) {
+    var event = new Date(date);
+    const fullmonth = [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+    ];
+    let month = fullmonth[event.getMonth()];
+    let day = event.getDate();
+    // var dayName = event.toString().split(' ')[0];
+    let year = event.getFullYear();
+    return `${year}-${month}-${day}`;
+}
+
 function isNumber(evt) {
     evt = evt ? evt : window.event;
     var charCode = evt.which ? evt.which : evt.keyCode;
@@ -92,6 +115,6 @@ function getLeaveType (type){
     }
 }
 
-export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader,getRoleName,getLeaveType };
+export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader,getRoleName,getLeaveType,timerDateFormate };
 
 // export default Common;

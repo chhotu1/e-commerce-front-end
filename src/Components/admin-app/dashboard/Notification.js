@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Helper from '../../../Helper';
 import { listNotifications, setNotificationDefaults } from '../../../Store/actions/NotificationActions';
