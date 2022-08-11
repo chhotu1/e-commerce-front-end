@@ -47,6 +47,27 @@ function timerDateFormate(date) {
     return `${year}-${month}-${day}`;
 }
 
+function dateFormateWithTime() {
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var d = new Date();
+    var day = days[d.getDay()];
+    var hr = d.getHours();
+    var min = d.getMinutes();
+    if (min < 10) {
+        min = "0" + min;
+    }
+    var ampm = "am";
+    if (hr > 12) {
+        hr -= 12;
+        ampm = "pm";
+    }
+    var date = d.getDate();
+    var month = months[d.getMonth()];
+    var year = d.getFullYear();
+    return hr + ":" + min + ampm + " " + date + " " + month + " " + year;
+}
+
 function isNumber(evt) {
     evt = evt ? evt : window.event;
     var charCode = evt.which ? evt.which : evt.keyCode;
@@ -97,24 +118,24 @@ function CustomLoader() {
     );
 }
 
-function getRoleName (role){
-    let index = Constant.ROLE.findIndex((item)=>item.value===role);
-    if(index !==-1){
+function getRoleName(role) {
+    let index = Constant.ROLE.findIndex((item) => item.value === role);
+    if (index !== -1) {
         return Constant.ROLE[index].name;
-    }else{
+    } else {
         return 0
     }
 }
 
-function getLeaveType (type){
-    let index = Constant.LEAVETYPE.findIndex((item)=>item.value===parseInt(type));
-    if(index !==-1){
+function getLeaveType(type) {
+    let index = Constant.LEAVETYPE.findIndex((item) => item.value === parseInt(type));
+    if (index !== -1) {
         return Constant.LEAVETYPE[index].name;
-    }else{
+    } else {
         return ''
     }
 }
 
-export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader,getRoleName,getLeaveType,timerDateFormate };
+export { formateDate, isNumber, buttonSpinner, spinner, CustomLoader, getRoleName, getLeaveType, timerDateFormate,dateFormateWithTime };
 
 // export default Common;

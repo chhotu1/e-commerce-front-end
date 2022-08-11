@@ -71,6 +71,7 @@ const Aside = (props) => {
             icon={<FaRegLaughWink />}
           >
             <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.LEAVE.MAIN}>Leave</Link></MenuItem>
+            <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.TIMER.MAIN}>Timer</Link></MenuItem>
           </SubMenu>
           {/* <SubMenu
             title="Category"

@@ -25,6 +25,9 @@ import Attendance from '../Pages/Admin/Attendance';
 import AttendanceAdd from '../Pages/Admin/Attendance/Add';
 import AttendanceEdit from '../Pages/Admin/Attendance/Edit';
 
+import Timer from '../Pages/Admin/Timer';
+
+
 import RouteName from './RouteName';
 // import Sidebar from '../Components/admin-app/Sidebar';
 import ProtectedRoutes from './ProtectedRoutes';
@@ -59,6 +62,9 @@ const AdminRoutes = (props) => {
           <Route exact={true} path={RouteName.LEAVE.MAIN} element={<Leave />} />
           <Route path={RouteName.LEAVE.ADD} element={<LeaveAdd />} />
           <Route path={`${RouteName.LEAVE.EDIT}:id`} element={<LeaveEdit />} />
+
+          <Route exact={true} path={RouteName.TIMER.MAIN} element={<Timer />} />
+
 
 
 
