@@ -6,7 +6,7 @@ import Notification from '../../Components/admin-app/dashboard/Notification';
 // import Helper from './../../Helper'
 
 import Box from '../../Components/admin-app/dashboard/Box';
-import Clock from '../../Components/admin-app/dashboard/Clock';
+// import Clock from '../../Components/admin-app/dashboard/Clock';
 const Admin = () => {
   const [toggled, setToggled] = useState(false);
   const handleToggleSidebar = (value) => {

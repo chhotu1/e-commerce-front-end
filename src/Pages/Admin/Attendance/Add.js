@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     useNavigate,
 } from "react-router-dom";
@@ -11,50 +11,91 @@ import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
 import Forms from './Forms'
 import { setLeaveDefaults, checkLeaveValidation, handleLeaveChange, addLeave, resetLeaveFields } from '../../../Store/actions/LeaveActions';
+import UserServices from '../../../Helper/Services/UserServices';
+import AttendenceServices from '../../../Helper/Services/AttendenceServices';
+import { CustomLoader } from '../../../Components/shared';
 
 const Add = (props) => {
     const [toggled, setToggled] = useState(false);
+    const [isSpinner, setIsSpinner] = useState(false);
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
     let navigate = useNavigate();
-    useEffect(()=>{
-        props.setLeaveDefaults();
-        props.resetLeaveFields();
-    },[])
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        getUser();
+    }, [])
 
-    const handleChange = (event) => {
-        event.preventDefault();
-        const { name, value } = event.target;
-        props.handleLeaveChange(name, value);
+    const handleChange = (checkedData, userId) => {
+        let userData = [...users];
+        let index = userData.findIndex((e) => e.user_id === userId);
+        if (index !== -1) {
+            userData[index]['present'] = checkedData;
+            setUsers(userData);
+        }
+    }
+
+    const getUser = () => {
+        setIsSpinner(true)
+        UserServices.list().then(response => {
+            if (response.data.status === true) {
+                let record = response.data.data;
+                if (record.length !== 0) {
+                    let userData = [];
+                    record.map((e) => {
+                        userData.push({ name: e.name, user_id: e._id, present: true, image_url: e.image_url })
+                    });
+                    setUsers(userData);
+                }
+            } else {
+                toast.error(response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+            setIsSpinner(false)
+        }).catch(error => {
+            setIsSpinner(false)
+            if (error.response) {
+                toast.error(error.response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+        })
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formObject = Helper.Forms.validateForm(
-            props.leave.leave,
-            props.leave.formError,
-            Helper.Forms.leaveForm
-        );
-        if (Object.keys(formObject).length !== 0) {
-            props.checkLeaveValidation(formObject);
-            return false;
-        }
-
-        props.addLeave(props.leave.leave, function (res) {
-            if (res.data.status === true) {
-                navigate(Helper.RouteName.LEAVE.MAIN);
+        setIsSpinner(true)
+        let payload = [];
+        users.map((e) => {
+            payload.push({ user_id: e.user_id, present: e.present });
+        })
+        AttendenceServices.add(payload).then(response => {
+            setIsSpinner(false)
+            if (response.data.status === true) {
+                navigate(Helper.RouteName.ATTENDENCE.MAIN);
                 toast.success("New Record Added Successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     theme: "colored",
                 })
             } else {
-                toast.warning(res.data.message, {
+                toast.error(response.data.message, {
                     position: toast.POSITION.TOP_RIGHT,
                     theme: "colored",
                 })
             }
-        });
+        }).catch(error => {
+            setIsSpinner(false)
+            if (error.response) {
+                toast.error(error.response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+        })
     }
 
     return (
@@ -65,10 +106,11 @@ const Add = (props) => {
             />
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
+                {isSpinner?<CustomLoader/>:''}
                 <div className='container'>
                     <CardContainer title="Attendence" backLink={Helper.RouteName.ATTENDENCE.MAIN}>
                         <Form onSubmit={handleSubmit}>
-                            <Forms handleChange={handleChange} formErrors={props.leave.formError} leave={props.leave.leave} />
+                            <Forms users={users} handleChange={handleChange} formErrors={props.leave.formError} leave={props.leave.leave} />
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>

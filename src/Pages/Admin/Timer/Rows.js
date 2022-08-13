@@ -1,4 +1,5 @@
 import React from 'react';
+import { dateFormateWithTime } from '../../../utils/CommonFunction';
 const Rows = (props) => {
   const { timer, index } = props;
   return (
@@ -7,7 +8,7 @@ const Rows = (props) => {
       <td>{timer?.total_hours}</td>
       <td>{timer?.status === true ? 'Start' : 'Stop'}</td>
       <td>{timer?.created_by?.name}</td>
-      <td>{(timer?.created_at)}</td>
+      <td>{dateFormateWithTime(timer?.created_at)}</td>
     </tr>
   )
 }

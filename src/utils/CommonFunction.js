@@ -47,26 +47,25 @@ function timerDateFormate(date) {
     return `${year}-${month}-${day}`;
 }
 
-function dateFormateWithTime() {
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var d = new Date();
-    var day = days[d.getDay()];
-    var hr = d.getHours();
-    var min = d.getMinutes();
-    if (min < 10) {
-        min = "0" + min;
-    }
-    var ampm = "am";
-    if (hr > 12) {
-        hr -= 12;
-        ampm = "pm";
-    }
-    var date = d.getDate();
-    var month = months[d.getMonth()];
-    var year = d.getFullYear();
-    return hr + ":" + min + ampm + " " + date + " " + month + " " + year;
+function dateFormateWithTime(date) {
+    var myDate = new Date(date);
+    var displayDate = myDate.getMonth()+ '/' +myDate.getDate()+ '/' +myDate.getFullYear()+ ' ' +formatAMPM(myDate);
+    return displayDate;
 }
+
+function formatAMPM(date) { // This is to display 12 hour format like you asked
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+  
+
+
 
 function isNumber(evt) {
     evt = evt ? evt : window.event;

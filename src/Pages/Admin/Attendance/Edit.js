@@ -1,65 +1,85 @@
-import React, {  useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     useNavigate,
     useParams
 } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap'
-import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import Aside from '../../../Components/admin-app/Aside';
 import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
-import Forms from './Forms'
-import { setLeaveDefaults, checkLeaveValidation, handleLeaveChange, resetLeaveFields,showLeave,editLeave } from '../../../Store/actions/LeaveActions';
 import { CustomLoader } from '../../../Components/shared';
-
-const Edit = (props) => {
+import AttendenceServices from '../../../Helper/Services/AttendenceServices';
+const Edit = () => {
     const [toggled, setToggled] = useState(false);
-    const [isSpinner,setIsSpinner] = useState(false)
+    const [isSpinner, setIsSpinner] = useState(false)
+    const [user, setUser] = useState({});
+    const [checkBox,setCheckBox] = useState(false)
+
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
     let navigate = useNavigate();
     let params = useParams();
-    useEffect(()=>{
-      props.setLeaveDefaults();
-      props.showLeave(params.id);
-    },[params])
-    
-    const handleChange = (event) => {
-        event.preventDefault();
-        const { name, value } = event.target;
-        props.handleLeaveChange(name, value);
-    }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const formObject = Helper.Forms.validateForm(
-            props.leave.leave,
-            props.leave.formError,
-            Helper.Forms.leaveForm
-        );
-        if (Object.keys(formObject).length !== 0) {
-            props.checkLeaveValidation(formObject);
-            return false;
-        }
+    useEffect(() => {
+        getUser()
+    }, [params])
+    const getUser = () => {
         setIsSpinner(true)
-        props.editLeave(props.leave.leave,params.id, function (res) {
-          setIsSpinner(false)
-            if (res.data.status === true) {
-                navigate(Helper.RouteName.LEAVE.MAIN);
-                toast.success("New Record Added Successfully", {
-                    position: toast.POSITION.TOP_RIGHT,
-                    theme: "colored",
-                })
+        AttendenceServices.showOne(params.id).then(response => {
+            if (response.data.status === true) {
+                let record = response.data.data;
+                setUser(record);
+                setCheckBox(record.present)
             } else {
-                toast.warning(res.data.message, {
+                toast.error(response.data.message, {
                     position: toast.POSITION.TOP_RIGHT,
                     theme: "colored",
                 })
             }
-        });
+            setIsSpinner(false)
+        }).catch(error => {
+            setIsSpinner(false)
+            if (error.response) {
+                toast.error(error.response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+        })
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        let payload={
+            present:checkBox,
+        }
+        setIsSpinner(true)
+        AttendenceServices.edit(payload,params.id).then(response => {
+            setIsSpinner(false)
+            if (response.data.status === true) {
+                navigate(Helper.RouteName.ATTENDENCE.MAIN);
+                toast.success("Record updated Successfully", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            } else {
+                toast.error(response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+        }).catch(error => {
+            setIsSpinner(false)
+            if (error.response) {
+                toast.error(error.response.data.message, {
+                    position: toast.POSITION.TOP_RIGHT,
+                    theme: "colored",
+                })
+            }
+        })
     }
 
     return (
@@ -71,10 +91,28 @@ const Edit = (props) => {
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
                 <div className='container'>
-                {isSpinner?(<CustomLoader/>):''}
-                    <CardContainer title="Add new leave" backLink={Helper.RouteName.LEAVE.MAIN}>
+                    {isSpinner ? (<CustomLoader />) : ''}
+                    <CardContainer title="Update Attendence" backLink={Helper.RouteName.ATTENDENCE.MAIN}>
                         <Form onSubmit={handleSubmit}>
-                            <Forms handleChange={handleChange} formErrors={props.leave.formError} leave={props.leave.leave} />
+                            <div className='col-md-3 mb-4'>
+                                <div className='row'>
+                                    <div className='col-md-2 p-0 m-0'>
+                                        {user?.user_id?.image_url ? (
+                                            <img src={user?.user_id?.image_url} alt="" style={{ height: 40, width: 40, borderRadius: '100%' }} />
+                                        ) : ''}
+                                    </div>
+                                    <div className='col-md-10'>
+                                        <Form.Check className='mt-2'
+                                            type="switch"
+                                            id={user?.id}
+                                            label={user?.user_id?.name}
+                                            onChange={(event)=>setCheckBox(event.target.checked)}
+                                            checked={checkBox}
+                                        />
+                                    </div>
+                                </div>
+
+                            </div>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
@@ -87,21 +125,4 @@ const Edit = (props) => {
     )
 }
 
-const mapStateToProps = (state, ownProps) => {
-    return {
-        leave: state.leave
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        handleLeaveChange: (field, value) => dispatch(handleLeaveChange(field, value)),
-        checkLeaveValidation: (value) => dispatch(checkLeaveValidation(value)),
-        setLeaveDefaults: () => dispatch(setLeaveDefaults()),
-        resetLeaveFields: () => dispatch(resetLeaveFields()),
-        editLeave: (payload,id, cb) => dispatch(editLeave(payload,id, cb)),
-        showLeave: (id) => dispatch(showLeave(id)),
-    }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)((Edit));
+export default Edit;
