@@ -25,6 +25,11 @@ import Attendance from '../Pages/Admin/Attendance';
 import AttendanceAdd from '../Pages/Admin/Attendance/Add';
 import AttendanceEdit from '../Pages/Admin/Attendance/Edit';
 
+//Attendance
+import Holidays from '../Pages/Admin/Holidays';
+import HolidaysAdd from '../Pages/Admin/Holidays/Add';
+import HolidaysEdit from '../Pages/Admin/Holidays/Edit';
+
 import Timer from '../Pages/Admin/Timer';
 
 
@@ -65,8 +70,7 @@ const AdminRoutes = (props) => {
 
           <Route exact={true} path={RouteName.TIMER.MAIN} element={<Timer />} />
 
-
-
+          <Route exact={true} path={RouteName.HOLIDAYS.MAIN} element={<Holidays />} />
 
           {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
           <Route element={<ManagementRoutes role={user?.role} />}>
@@ -80,6 +84,9 @@ const AdminRoutes = (props) => {
             <Route exact={true} path={RouteName.ATTENDENCE.MAIN} element={<Attendance />} />
             <Route path={RouteName.ATTENDENCE.ADD} element={<AttendanceAdd />} />
             <Route path={`${RouteName.ATTENDENCE.EDIT}:id`} element={<AttendanceEdit />} />
+
+            <Route path={RouteName.HOLIDAYS.ADD} element={<HolidaysAdd />} />
+            <Route path={`${RouteName.HOLIDAYS.EDIT}:id`} element={<HolidaysEdit />} />
 
           </Route>
         </Route>

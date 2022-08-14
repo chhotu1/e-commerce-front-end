@@ -72,6 +72,7 @@ const Aside = (props) => {
           >
             <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.LEAVE.MAIN}>Leave</Link></MenuItem>
             <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.TIMER.MAIN}>Timer</Link></MenuItem>
+            <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.HOLIDAYS.MAIN}>Holidays</Link></MenuItem>
           </SubMenu>
           {/* <SubMenu
             title="Category"
