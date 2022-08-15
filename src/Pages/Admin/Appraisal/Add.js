@@ -10,8 +10,9 @@ import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
 import Forms from './Forms'
-import { setHolidayDefaults, checkHolidayValidation, handleHolidayChange, addHoliday, resetHolidayFields } from '../../../Store/actions/HolidaysActions';
+import { setAppraisalDefaults, checkAppraisalValidation, handleAppraisalChange, addAppraisal, resetAppraisalFields } from '../../../Store/actions/AppraisalActions';
 import { CustomLoader } from '../../../Components/shared';
+import { listUsers } from '../../../Store/actions/UserActions';
 
 const Add = (props) => {
     const [toggled, setToggled] = useState(false);
@@ -20,30 +21,38 @@ const Add = (props) => {
     }
     let navigate = useNavigate();
     useEffect(() => {
-        props.setHolidayDefaults();
-        props.resetHolidayFields();
+        props.setAppraisalDefaults();
+        props.resetAppraisalFields();
+        props.listUsers();
     }, [])
 
     const handleChange = (event) => {
         event.preventDefault();
+        
         const { name, value } = event.target;
-        props.handleHolidayChange(name, value);
+        console.log(value)
+        if(name==='amount'){
+            props.handleAppraisalChange(name, parseInt(value));
+        }else{
+            props.handleAppraisalChange(name, value);
+        }
+       
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formObject = Helper.Forms.validateForm(
-            props.holidays.holiday,
-            props.holidays.formError,
-            Helper.Forms.holidaysForm
+            props.appraisal.appraisal,
+            props.appraisal.formError,
+            Helper.Forms.appraisalForm
         );
         if (Object.keys(formObject).length !== 0) {
-            props.checkHolidayValidation(formObject);
+            props.checkAppraisalValidation(formObject);
             return false;
         }
-        props.addHoliday(props.holidays.holiday, function (res) {
+        props.addAppraisal(props.appraisal.appraisal, function (res) {
             if (res.data.status === true) {
-                navigate(Helper.RouteName.HOLIDAYS.MAIN);
+                navigate(Helper.RouteName.APPRAISAL.MAIN);
                 toast.success("New Record Added Successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     theme: "colored",
@@ -57,6 +66,8 @@ const Add = (props) => {
         });
     }
 
+    let users = props.user.users;
+
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
             <Aside
@@ -65,11 +76,11 @@ const Add = (props) => {
             />
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
-                {props.holidays.create_update_spinner?(<CustomLoader/>):''}
+                {props.appraisal.create_update_spinner?(<CustomLoader/>):''}
                 <div className='container'>
-                    <CardContainer title="Add new holidays" backLink={Helper.RouteName.HOLIDAYS.MAIN}>
+                    <CardContainer title="Add new appraisal" backLink={Helper.RouteName.APPRAISAL.MAIN}>
                         <Form onSubmit={handleSubmit}>
-                            <Forms handleChange={handleChange} formErrors={props.holidays.formError} holiday={props.holidays.holiday} />
+                            <Forms handleChange={handleChange} users={users} formErrors={props.appraisal.formError} appraisal={props.appraisal.appraisal} />
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
@@ -84,17 +95,19 @@ const Add = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        holidays: state.holidays
+        appraisal: state.appraisal,
+        user: state.user,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleHolidayChange: (field, value) => dispatch(handleHolidayChange(field, value)),
-        checkHolidayValidation: (value) => dispatch(checkHolidayValidation(value)),
-        setHolidayDefaults: () => dispatch(setHolidayDefaults()),
-        resetHolidayFields: () => dispatch(resetHolidayFields()),
-        addHoliday: (payload, cb) => dispatch(addHoliday(payload, cb)),
+        handleAppraisalChange: (field, value) => dispatch(handleAppraisalChange(field, value)),
+        checkAppraisalValidation: (value) => dispatch(checkAppraisalValidation(value)),
+        setAppraisalDefaults: () => dispatch(setAppraisalDefaults()),
+        resetAppraisalFields: () => dispatch(resetAppraisalFields()),
+        addAppraisal: (payload, cb) => dispatch(addAppraisal(payload, cb)),
+        listUsers: () => dispatch(listUsers()),
     }
 };
 

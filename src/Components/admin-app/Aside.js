@@ -11,7 +11,7 @@ import {
 } from 'react-pro-sidebar';
 import {
    FaGithub,FaTh,
-   FaRegLaughWink,FaUserFriends,FaSignOutAlt,FaUserAlt,FaFacebookMessenger,FaCalendarAlt,FaUsers
+   FaRegLaughWink,FaUserFriends,FaSignOutAlt,FaUserAlt,FaFacebookMessenger,FaCalendarAlt,FaUsers,FaClock
 } from 'react-icons/fa';
 import sidebarBg from '../../Assets/images/bg2.jpg';
 import { Link } from 'react-router-dom';
@@ -63,6 +63,7 @@ const Aside = (props) => {
              <MenuItem icon={<FaUserFriends />}>  <Link to={Helper.RouteName.ADMIN.USER.MAIN}>Users</Link></MenuItem>
             <MenuItem icon={<FaFacebookMessenger />}> <Link to={Helper.RouteName.NOTIFICATION.MAIN}>Notification</Link></MenuItem>
             <MenuItem icon={<FaUsers />}> <Link to={Helper.RouteName.ATTENDENCE.MAIN}>Attendance</Link></MenuItem>
+            <MenuItem icon={<FaUsers />}> <Link to={Helper.RouteName.APPRAISAL.MAIN}>Appraisal</Link></MenuItem>
           </SubMenu>
         </Menu>: ''}
         <Menu iconShape="circle">
@@ -71,7 +72,7 @@ const Aside = (props) => {
             icon={<FaRegLaughWink />}
           >
             <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.LEAVE.MAIN}>Leave</Link></MenuItem>
-            <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.TIMER.MAIN}>Timer</Link></MenuItem>
+            <MenuItem icon={<FaClock />}> <Link to={Helper.RouteName.TIMER.MAIN}>Timer</Link></MenuItem>
             <MenuItem icon={<FaCalendarAlt />}> <Link to={Helper.RouteName.HOLIDAYS.MAIN}>Holidays</Link></MenuItem>
           </SubMenu>
           {/* <SubMenu

@@ -6,6 +6,7 @@ import leave from './LeaveReducer';
 import notification from './NotificationReducer';
 import timer from './TimerReducer';
 import holidays from './HolidaysReducer';
+import appraisal from './AppraisalReducer';
 
 const rootReducer = combineReducers({
    category: categoryReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
    leave,
    notification,
    timer,
-   holidays
+   holidays,
+   appraisal
 });
 
 export default rootReducer;

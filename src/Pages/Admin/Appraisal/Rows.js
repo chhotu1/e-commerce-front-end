@@ -1,16 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { deleteHoliday } from '../../../Store/actions/HolidaysActions';
+import { deleteAppraisal } from '../../../Store/actions/AppraisalActions';
 import { FaTrashAlt, FaRegEdit } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import Helper from '../../../Helper';
-import Constant from '../../../utils/Constant';
 const Rows = (props) => {
-  const { holiday, index,user } = props;
+  const { appraisal, index } = props;
   const handleDelete = (e) => {
     e.preventDefault();
-    props.deleteHoliday(holiday._id, function (response) {
+    props.deleteAppraisal(appraisal._id, function (response) {
       if (response.data.status === true) {
         toast.success(response.data.message, {
           position: toast.POSITION.TOP_RIGHT,
@@ -28,23 +27,22 @@ const Rows = (props) => {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{holiday?.start_date}</td>
-      <td>{holiday?.end_date}</td>
-      <td>{holiday?.title}</td>
-      <td>{holiday?.status === 1 ? 'Active' : 'Deactive'}</td>
-      <td>{holiday?.created_by?.name}</td>
-      {user?.role===Constant.ADMIN ||user?.role===Constant.HR_MANEGER?
+      <td>{appraisal?.start_date}</td>
+      <td>{appraisal?.end_date}</td>
+      <td>{appraisal?.title}</td>
+      <td>{appraisal?.status === 1 ? 'Active' : 'Deactive'}</td>
+      <td>{appraisal?.created_by?.name}</td>
       <td>
-        {/* <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.HOLIDAYS.EDIT}${holiday._id}`} ><FaRegEdit /></Link></div> */}
+        <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.APPRAISAL.EDIT}${appraisal._id}`} ><FaRegEdit /></Link></div>
         <div className="btn btn-danger btn-sm" onClick={handleDelete}><FaTrashAlt /></div>
-      </td>:''}
+      </td>
     </tr>
   )
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteHoliday: (id, fun) => dispatch(deleteHoliday(id, fun))
+    deleteAppraisal: (id, fun) => dispatch(deleteAppraisal(id, fun))
   }
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     useNavigate,
+    useParams
 } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux';
@@ -10,40 +11,50 @@ import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
 import Forms from './Forms'
-import { setHolidayDefaults, checkHolidayValidation, handleHolidayChange, addHoliday, resetHolidayFields } from '../../../Store/actions/HolidaysActions';
+import { setAppraisalDefaults, checkAppraisalValidation, handleAppraisalChange, resetAppraisalFields, showAppraisal, editAppraisal } from '../../../Store/actions/AppraisalActions';
 import { CustomLoader } from '../../../Components/shared';
+import { listUsers } from '../../../Store/actions/UserActions';
 
-const Add = (props) => {
+const Edit = (props) => {
     const [toggled, setToggled] = useState(false);
+    const [isSpinner, setIsSpinner] = useState(false)
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
     let navigate = useNavigate();
+    let params = useParams();
     useEffect(() => {
-        props.setHolidayDefaults();
-        props.resetHolidayFields();
-    }, [])
+        props.setAppraisalDefaults();
+        props.showAppraisal(params.id);
+        
+    }, [params])
+
+    useEffect(()=>{
+        props.listUsers();
+    },[])
 
     const handleChange = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
-        props.handleHolidayChange(name, value);
+        props.handleAppraisalChange(name, value);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const formObject = Helper.Forms.validateForm(
-            props.holidays.holiday,
-            props.holidays.formError,
-            Helper.Forms.holidaysForm
+            props.appraisal.appraisal,
+            props.appraisal.formError,
+            Helper.Forms.appraisalForm
         );
         if (Object.keys(formObject).length !== 0) {
-            props.checkHolidayValidation(formObject);
+            props.checkAppraisalValidation(formObject);
             return false;
         }
-        props.addHoliday(props.holidays.holiday, function (res) {
+        setIsSpinner(true)
+        props.editAppraisal(props.appraisal.appraisal, params.id, function (res) {
+            setIsSpinner(false)
             if (res.data.status === true) {
-                navigate(Helper.RouteName.HOLIDAYS.MAIN);
+                navigate(Helper.RouteName.APPRAISAL.MAIN);
                 toast.success("New Record Added Successfully", {
                     position: toast.POSITION.TOP_RIGHT,
                     theme: "colored",
@@ -57,6 +68,8 @@ const Add = (props) => {
         });
     }
 
+    let users = props.user.users;
+
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
             <Aside
@@ -65,11 +78,11 @@ const Add = (props) => {
             />
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
-                {props.holidays.create_update_spinner?(<CustomLoader/>):''}
                 <div className='container'>
-                    <CardContainer title="Add new holidays" backLink={Helper.RouteName.HOLIDAYS.MAIN}>
+                    {isSpinner ? (<CustomLoader />) : ''}
+                    <CardContainer title="Add new appraisal" backLink={Helper.RouteName.APPRAISAL.MAIN}>
                         <Form onSubmit={handleSubmit}>
-                            <Forms handleChange={handleChange} formErrors={props.holidays.formError} holiday={props.holidays.holiday} />
+                            <Forms handleChange={handleChange} users={users} formErrors={props.appraisal.formError} appraisal={props.appraisal.appraisal} />
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
@@ -84,18 +97,22 @@ const Add = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        holidays: state.holidays
+        appraisal: state.appraisal,
+        user: state.user,
+
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        handleHolidayChange: (field, value) => dispatch(handleHolidayChange(field, value)),
-        checkHolidayValidation: (value) => dispatch(checkHolidayValidation(value)),
-        setHolidayDefaults: () => dispatch(setHolidayDefaults()),
-        resetHolidayFields: () => dispatch(resetHolidayFields()),
-        addHoliday: (payload, cb) => dispatch(addHoliday(payload, cb)),
+        handleAppraisalChange: (field, value) => dispatch(handleAppraisalChange(field, value)),
+        checkAppraisalValidation: (value) => dispatch(checkAppraisalValidation(value)),
+        setAppraisalDefaults: () => dispatch(setAppraisalDefaults()),
+        resetAppraisalFields: () => dispatch(resetAppraisalFields()),
+        editAppraisal: (payload, id, cb) => dispatch(editAppraisal(payload, id, cb)),
+        showAppraisal: (id) => dispatch(showAppraisal(id)),
+        listUsers: () => dispatch(listUsers())
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)((Add));
+export default connect(mapStateToProps, mapDispatchToProps)((Edit));

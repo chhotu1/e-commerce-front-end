@@ -164,6 +164,7 @@ const Forms = {
     switch (name) {
       case "title":
         if (!value) return "The title field is required";
+        else return "";
       default:
         return "";
     }
@@ -172,6 +173,34 @@ const Forms = {
     switch (name) {
       case "title":
         if (!value) return "The title field is required";
+        else return "";
+      case "status":
+        if (!value) return "The status field is required";
+        else return "";
+      default:
+        return "";
+    }
+  },
+  appraisalForm: (name, value) => {
+    switch (name) {
+      case "title":
+        if (!value) return "The title field is required";
+        else return "";
+      case "status":
+        if (!value) return "The status field is required";
+        else return "";
+      case "start_date":
+        if (!value) return "The start appraisal field is required";
+        else return "";
+      case "end_date":
+        if (!value) return "The next appraisal field is required";
+        else return "";
+      case "amount":
+        if (!value) return "The amount appraisal field is required";
+        else return "";
+        case "user":
+        if (!value) return "The user appraisal field is required";
+        else return "";
       default:
         return "";
     }

@@ -47,6 +47,11 @@ const RouteName = {
         MAIN:'/admin/holidays',
         ADD:'/admin/holidays/add',
         EDIT:'/admin/holidays/edit/',
+    },
+    APPRAISAL:{
+        MAIN:'/admin/appraisal',
+        ADD:'/admin/appraisal/add',
+        EDIT:'/admin/appraisal/edit/',
     }
     
 }

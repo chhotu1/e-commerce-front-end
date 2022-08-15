@@ -5,26 +5,22 @@ import Aside from '../../../Components/admin-app/Aside';
 import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
 import Helper from '../../../Helper';
-import { listHolidays, setHolidayDefaults } from '../../../Store/actions/HolidaysActions';
-import { currentUser, } from '../../../Store/actions/UserActions';
+import { listAppraisal, setAppraisalDefaults } from '../../../Store/actions/AppraisalActions';
 import Rows from './Rows';
 import { CustomLoader } from '../../../Components/shared';
-import Constant from '../../../utils/Constant';
 
-const Holidays = (props) => {
+const Appraisal = (props) => {
     const [toggled, setToggled] = useState(false);
     const handleToggleSidebar = (value) => {
         setToggled(value)
     }
 
     useEffect(() => {
-        props.setHolidayDefaults();
-        props.listHolidays();
-        props.currentUser();
+        props.setAppraisalDefaults();
+        props.listAppraisal();
     }, [])
 
-    const holidays = props.holidays.holidays;
-    const user = props.user.current_user;
+    const appraisals = props.appraisal.appraisals;
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
             <Aside
@@ -34,9 +30,9 @@ const Holidays = (props) => {
             <div className='admin-content'>
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
                 <div className='container'>
-                    {props.holidays.list_spinner ? <CustomLoader /> : ''}
+                    {props.appraisal.list_spinner ? <CustomLoader /> : ''}
 
-                    <CardContainer title="Holidays list" link={user?.role === Constant.ADMIN || user?.role === Constant.HR_MANEGER ? Helper.RouteName.HOLIDAYS.ADD : ''} linkTitle={user?.role === Constant.ADMIN || user?.role === Constant.HR_MANEGER ? "Add Holidays" : ''}>
+                    <CardContainer title="Appraisal list" link={Helper.RouteName.APPRAISAL.ADD} linkTitle={ "Add Appraisal"}>
 
                         <Table striped bordered hover responsive>
                             <thead>
@@ -47,14 +43,14 @@ const Holidays = (props) => {
                                     <th>Title</th>
                                     <th>Status</th>
                                     <th>Created by</th>
-                                    {user?.role === Constant.ADMIN || user?.role === Constant.HR_MANEGER ? <th>Action</th> : ''}
+                                    <th>Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    holidays ? (
-                                        holidays.map((item, index) => <Rows key={item._id} holiday={item} index={index} user={user} />)
+                                    appraisals ? (
+                                        appraisals.map((item, index) => <Rows key={item._id} appraisal={item} index={index} />)
                                     ) : null
                                 }
                             </tbody>
@@ -70,17 +66,15 @@ const Holidays = (props) => {
 const mapStateToProps = (state, ownProps) => {
 
     return {
-        holidays: state.holidays,
-        user: state.user
+        appraisal: state.appraisal,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        listHolidays: () => dispatch(listHolidays()),
-        currentUser: () => dispatch(currentUser()),
-        setHolidayDefaults: () => dispatch(setHolidayDefaults())
+        listAppraisal: () => dispatch(listAppraisal()),
+        setAppraisalDefaults: () => dispatch(setAppraisalDefaults())
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Holidays);
+export default connect(mapStateToProps, mapDispatchToProps)(Appraisal);

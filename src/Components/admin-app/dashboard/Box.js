@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    FaArrowCircleRight, FaUserFriends, FaCalendarAlt, FaBirthdayCake
+    FaArrowCircleRight, FaUserFriends, FaCalendarAlt, FaBirthdayCake,FaClock
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Helper from '../../../Helper';
@@ -8,7 +8,8 @@ const Box = () => {
     const DashboardMenu = [
         { id: 2, count: 20, title: 'Leave', url: Helper.RouteName.LEAVE.MAIN, color: 'info', icon: <FaUserFriends /> },
         { id: 3, count: 120, title: 'Holidays', url: Helper.RouteName.HOLIDAYS.MAIN, color: 'success', icon: <FaCalendarAlt /> },
-        { id: 4, count: 10, title: 'Birthday wishes', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
+        { id: 4, count: 10, title: 'Timer', url: Helper.RouteName.TIMER.MAIN, color: 'primary', icon: <FaClock /> },
+        { id: 5, count: 10, title: 'Birthday wishes', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
     ];
     return (
         <div className='dashboard-content p-4'>

@@ -30,6 +30,11 @@ import Holidays from '../Pages/Admin/Holidays';
 import HolidaysAdd from '../Pages/Admin/Holidays/Add';
 import HolidaysEdit from '../Pages/Admin/Holidays/Edit';
 
+//Appraisal
+import Appraisal from '../Pages/Admin/Appraisal';
+import AppraisalAdd from '../Pages/Admin/Appraisal/Add';
+import AppraisalEdit from '../Pages/Admin/Appraisal/Edit';
+
 import Timer from '../Pages/Admin/Timer';
 
 
@@ -87,6 +92,10 @@ const AdminRoutes = (props) => {
 
             <Route path={RouteName.HOLIDAYS.ADD} element={<HolidaysAdd />} />
             <Route path={`${RouteName.HOLIDAYS.EDIT}:id`} element={<HolidaysEdit />} />
+
+            <Route exact={true} path={RouteName.APPRAISAL.MAIN} element={<Appraisal />} />
+            <Route path={RouteName.APPRAISAL.ADD} element={<AppraisalAdd />} />
+            <Route path={`${RouteName.APPRAISAL.EDIT}:id`} element={<AppraisalEdit />} />
 
           </Route>
         </Route>

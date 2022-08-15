@@ -1,4 +1,4 @@
-import * as HolidaysTypes from '../actionTypes/HolidaysTypes';
+import * as AppraisalTypes from '../actionTypes/AppraisalTypes';
 import Forms from '../../Helper/Forms';
 const initialValue = {
     title: "",
@@ -6,11 +6,13 @@ const initialValue = {
     end_date: "",
     description: "",
     status: "",
+    amount:"",
+    user:"",
 }
 
 const initialState = {
-    holidays: [],
-    holiday: initialValue,
+    appraisals: [],
+    appraisal: initialValue,
     formError: initialValue,
     success_message: "",
     error_message: "",
@@ -19,50 +21,50 @@ const initialState = {
     create_update_spinner: false
 };
 
-const holidaysReducer = function (state = initialState, action) {
+const appraisalReducer = function (state = initialState, action) {
     switch (action.type) {
-        case HolidaysTypes.SET_HOLIDAY_DEFAULTS:
+        case AppraisalTypes.SET_APPRAISAL_DEFAULTS:
             return {
                 ...state,
-                holiday: { ...state.holiday },
+                appraisal: { ...state.appraisal },
                 success_message: "",
                 error_message: "",
                 validation_errors: {},
                 list_spinner: false,
                 create_update_spinner: false
             };
-        case HolidaysTypes.LIST_HOLIDAYS:
+        case AppraisalTypes.LIST_APPRAISALS:
             return {
                 ...state,
                 list_spinner: true
             };
-        case HolidaysTypes.LIST_HOLIDAYS_SUCCESS:
+        case AppraisalTypes.LIST_APPRAISALS_SUCCESS:
             return {
                 ...state,
-                holidays: action.data,
+                appraisals: action.data,
                 list_spinner: false
             };
-        case HolidaysTypes.LIST_HOLIDAYS_FAILURE:
+        case AppraisalTypes.LIST_APPRAISALS_FAILURE:
             return {
                 ...state,
                 error_message: action.error,
                 list_spinner: false
             };
-        case HolidaysTypes.CREATE_HOLIDAYS:
+        case AppraisalTypes.CREATE_APPRAISALS:
             return {
                 ...state,
                 create_update_spinner: true
             };
-        case HolidaysTypes.CREATE_HOLIDAYS_SUCCESS:
+        case AppraisalTypes.CREATE_APPRAISALS_SUCCESS:
             return {
                 ...state,
                 create_update_spinner: false,
-                holiday: action.data.data,
+                appraisal: action.data.data,
                 success_message: action.data.message,
                 error_message: "",
                 validation_errors: {}
             };
-        case HolidaysTypes.CREATE_HOLIDAYS_FAILURE:
+        case AppraisalTypes.CREATE_APPRAISALS_FAILURE:
             return {
                 ...state,
                 create_update_spinner: false,
@@ -70,38 +72,38 @@ const holidaysReducer = function (state = initialState, action) {
                 validation_errors: action.error.errors,
                 success_message: ""
             };
-        case HolidaysTypes.SHOW_HOLIDAY:
+        case AppraisalTypes.SHOW_APPRAISAL:
             return {
                 ...state,
                 create_update_spinner: true
             };
-        case HolidaysTypes.SHOW_HOLIDAY_SUCCESS:
+        case AppraisalTypes.SHOW_APPRAISAL_SUCCESS:
             return {
                 ...state,
                 create_update_spinner: false,
-                holiday: { ...action.data.data }
+                appraisal: { ...action.data.data }
             };
-        case HolidaysTypes.SHOW_HOLIDAY_FAILURE:
+        case AppraisalTypes.SHOW_APPRAISAL_FAILURE:
             return {
                 ...state,
                 create_update_spinner: false,
                 error_message: action.error.message
             };
-        case HolidaysTypes.EDIT_HOLIDAYS:
+        case AppraisalTypes.EDIT_APPRAISALS:
             return {
                 ...state,
                 create_update_spinner: true
             };
-        case HolidaysTypes.EDIT_HOLIDAYS_SUCCESS:
+        case AppraisalTypes.EDIT_APPRAISALS_SUCCESS:
             return {
                 ...state,
                 create_update_spinner: false,
-                holiday: action.data.data,
+                appraisal: action.data.data,
                 success_message: action.data.message,
                 error_message: "",
                 validation_errors: {}
             };
-        case HolidaysTypes.EDIT_HOLIDAYS_FAILURE:
+        case AppraisalTypes.EDIT_APPRAISALS_FAILURE:
             return {
                 ...state,
                 create_update_spinner: false,
@@ -109,38 +111,38 @@ const holidaysReducer = function (state = initialState, action) {
                 validation_errors: action.error.errors,
                 success_message: ""
             };
-        case HolidaysTypes.DELETE_HOLIDAYS:
+        case AppraisalTypes.DELETE_APPRAISALS:
             return {
                 ...state,
                 list_spinner: true
             };
-        case HolidaysTypes.DELETE_HOLIDAYS_SUCCESS:
-            let holidays = state.holidays;
-            holidays = state.holidays.filter(item => item._id !== action.id);
+        case AppraisalTypes.DELETE_APPRAISALS_SUCCESS:
+            let appraisals = state.appraisals;
+            appraisals = state.appraisals.filter(item => item._id !== action.id);
 
             return {
                 ...state,
                 list_spinner: false,
-                holidays: holidays,
+                appraisals: appraisals,
                 success_message: action.message,
                 error_message: ''
             };
 
-        case HolidaysTypes.DELETE_HOLIDAYS_FAILURE:
+        case AppraisalTypes.DELETE_APPRAISALS_FAILURE:
             return {
                 ...state,
                 list_spinner: false,
                 error_message: action.error.message,
                 success_message: ''
             };
-        case HolidaysTypes.RESET_HOLIDAY_FIELDS:
+        case AppraisalTypes.RESET_APPRAISAL_FIELDS:
             return {
                 ...state,
-                holiday: initialValue
+                appraisal: initialValue
             };
-        case HolidaysTypes.HANDLE_HOLIDAY_CHANGE:
+        case AppraisalTypes.HANDLE_APPRAISAL_CHANGE:
             return handleChange(state, action);
-        case HolidaysTypes.VALIDATE_HOLIDAY_FORM:
+        case AppraisalTypes.VALIDATE_APPRAISAL_FORM:
             return handleCheckFormValidation(state, action);
         default:
             return state;
@@ -155,8 +157,8 @@ const holidaysReducer = function (state = initialState, action) {
 function handleChange(state, action) {
     return {
         ...state,
-        holiday: { ...state.holiday, [action.field]: action.data },
-        formError: { ...state.formError, [action.field]: Forms.holidaysForm(action.field, action.data) }
+        appraisal: { ...state.appraisal, [action.field]: action.data },
+        formError: { ...state.formError, [action.field]: Forms.appraisalForm(action.field, action.data) }
     };
 }
 
@@ -167,4 +169,4 @@ function handleCheckFormValidation(state, action) {
     };
 }
 
-export default holidaysReducer;
+export default appraisalReducer;
