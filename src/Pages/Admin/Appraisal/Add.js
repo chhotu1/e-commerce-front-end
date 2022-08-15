@@ -48,6 +48,10 @@ const Add = (props) => {
         );
         if (Object.keys(formObject).length !== 0) {
             props.checkAppraisalValidation(formObject);
+            toast.info("Please fill the required fields", {
+                position: toast.POSITION.TOP_RIGHT,
+                theme: "colored",
+            })
             return false;
         }
         props.addAppraisal(props.appraisal.appraisal, function (res) {

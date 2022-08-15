@@ -107,6 +107,10 @@ class Add extends Component {
         );
         if (Object.keys(formObject).length !== 0) {
             this.props.checkUserValidation(formObject);
+            toast.info("Please fill the required fields", {
+                position: toast.POSITION.TOP_RIGHT,
+                theme: "colored",
+            })
             return false;
         }
         this.setState({isSpinner:true});

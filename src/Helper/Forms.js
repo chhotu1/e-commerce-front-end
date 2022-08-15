@@ -148,13 +148,13 @@ const Forms = {
       case "title":
         if (!value) return "The title field is required";
       case "start_date":
-        if (!value) return "The start_date field is required";
+        if (!value) return "The start date field is required";
         else return "";
       case "end_date":
-        if (!value) return "The end_date field is required";
+        if (!value) return "The end date field is required";
         else return "";
       case "leave_type":
-        if (!value) return "The leave_type field is required";
+        if (!value) return "The leave type field is required";
         else return "";
       default:
         return "";
@@ -177,6 +177,12 @@ const Forms = {
       case "status":
         if (!value) return "The status field is required";
         else return "";
+      case "start_date":
+        if (!value) return "The start appraisal field is required";
+        else return "";
+      case "end_date":
+        if (!value) return "The next appraisal field is required";
+        else return "";
       default:
         return "";
     }
@@ -198,7 +204,7 @@ const Forms = {
       case "amount":
         if (!value) return "The amount appraisal field is required";
         else return "";
-        case "user":
+      case "user":
         if (!value) return "The user appraisal field is required";
         else return "";
       default:

@@ -10,7 +10,7 @@ export default class Forms extends Component {
     return (
       <div>
         <Form.Group className="mb-3">
-          <Form.Label>Title</Form.Label>
+          <Form.Label>Title</Form.Label><Form.Label className='error'>*</Form.Label>
           <Form.Control type="text" name="title" placeholder="Enter Title" onChange={handleChange} />
           {formErrors?.title ? (<div className="error">{formErrors?.title}</div>) : null}
         </Form.Group>

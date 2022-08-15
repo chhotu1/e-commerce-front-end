@@ -39,6 +39,10 @@ const Add = (props) => {
         );
         if (Object.keys(formObject).length !== 0) {
             props.checkHolidayValidation(formObject);
+            toast.info("Please fill the required fields", {
+                position: toast.POSITION.TOP_RIGHT,
+                theme: "colored",
+            })
             return false;
         }
         props.addHoliday(props.holidays.holiday, function (res) {

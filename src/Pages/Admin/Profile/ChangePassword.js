@@ -33,6 +33,10 @@ const ChangePassword = () => {
 
         if (Object.keys(formObject).length !== 0) {
             setFormError({ ...formError, ...formObject });
+            toast.info("Please fill the required fields", {
+                position: toast.POSITION.TOP_RIGHT,
+                theme: "colored",
+            })
             return false;
         }
         setIsSpinner(true)
@@ -81,25 +85,25 @@ const ChangePassword = () => {
                 <div className='container'>
                 {isSpinner?<CustomLoader/>:''}
                     <CardContainer title="Change Password">
-                        <div className='d-flex justify-content-center'>
+                        <div className='row'>
                             <div className='col-md-5'>
                                 <Form onSubmit={handleSubmit}>
                                     <Form.Group className="mb-3" controlId="formBasicEmail" >
-                                        <Form.Label>Current password</Form.Label>
+                                        <Form.Label>Current password</Form.Label><Form.Label className='error'>*</Form.Label>
                                         <Form.Control type="password" placeholder="Enter current password" value={form.currentPassword} name="currentPassword" onChange={handleChange} />
                                         {formError.currentPassword ? <Form.Text className="error">
                                             {formError.currentPassword}
                                         </Form.Text> : ''}
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicNewPassword">
-                                        <Form.Label>New password</Form.Label>
+                                        <Form.Label>New password</Form.Label><Form.Label className='error'>*</Form.Label>
                                         <Form.Control type="password" placeholder="New password" value={form.newPassword} name="newPassword" onChange={handleChange} />
                                         {formError.newPassword ? <Form.Text className="error">
                                             {formError.newPassword}
                                         </Form.Text> : ''}
                                     </Form.Group>
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                                        <Form.Label>Confirm password</Form.Label>
+                                        <Form.Label>Confirm password</Form.Label><Form.Label className='error'>*</Form.Label>
                                         <Form.Control type="password" placeholder="Confirm password" value={form.verifyPassword} name="verifyPassword" onChange={handleChange} />
                                         {formError.verifyPassword ? <Form.Text className="error">
                                             {formError.verifyPassword}

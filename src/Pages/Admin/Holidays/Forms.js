@@ -49,7 +49,7 @@ const Forms = (props) => {
         </div>
         <div className='col-md-12'>
           <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label><Form.Label className='error'>*</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control as="textarea" rows={3} name="description" placeholder="Enter title" onChange={handleChange} value={holiday?.description} />
            {formErrors?.description ? (<div className="error">{formErrors?.description}</div>) : null}
           </Form.Group>

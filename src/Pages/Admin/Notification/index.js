@@ -32,7 +32,7 @@ const Notification = (props) => {
                 <div className='container'>
                 {props.notification.list_spinner?<CustomLoader/>:''}
 
-                    <CardContainer title="notification list" link={Helper.RouteName.NOTIFICATION.ADD} linkTitle="New Notification">
+                    <CardContainer title="Notification list" link={Helper.RouteName.NOTIFICATION.ADD} linkTitle="New Notification">
 
                         <Table striped bordered hover responsive>
                             <thead>
