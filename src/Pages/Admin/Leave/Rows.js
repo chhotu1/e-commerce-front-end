@@ -34,7 +34,7 @@ const Rows = (props) => {
       <td>{leave?.title}</td>
       <td>{getLeaveType(leave?.leave_type)}</td>
       
-      <td>{leave?.status === 1 ? 'Active' : 'Deactive'}</td>
+      <td><span className={`status ${leave?.status === 1 ? 'active' : 'deactive'}`}>{leave?.status === 1 ? 'Active' : 'Deactive'}</span></td>
       <td>{leave?.created_by?.name}</td>
       <td>
         <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.LEAVE.EDIT}${leave._id}`} ><FaRegEdit /></Link></div>

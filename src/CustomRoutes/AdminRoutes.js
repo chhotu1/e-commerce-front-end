@@ -77,6 +77,9 @@ const AdminRoutes = (props) => {
 
           <Route exact={true} path={RouteName.HOLIDAYS.MAIN} element={<Holidays />} />
 
+          <Route exact={true} path={RouteName.ATTENDENCE.MAIN} element={<Attendance />} />
+
+
           {/* <Route exact={true} path={RouteName.PAYERSETUP} element={localStorage.getItem('user.payerId')?<Navigate to="/dashboard"/>:<PayerSetup />} /> */}
           <Route element={<ManagementRoutes role={user?.role} />}>
             <Route exact={true} path={RouteName.ADMIN.USER.MAIN} element={<Users />} />
@@ -86,7 +89,6 @@ const AdminRoutes = (props) => {
             <Route path={RouteName.NOTIFICATION.ADD} element={<NotificationAdd />} />
             <Route path={`${RouteName.NOTIFICATION.EDIT}:id`} element={<NotificationEdit />} />
 
-            <Route exact={true} path={RouteName.ATTENDENCE.MAIN} element={<Attendance />} />
             <Route path={RouteName.ATTENDENCE.ADD} element={<AttendanceAdd />} />
             <Route path={`${RouteName.ATTENDENCE.EDIT}:id`} element={<AttendanceEdit />} />
 

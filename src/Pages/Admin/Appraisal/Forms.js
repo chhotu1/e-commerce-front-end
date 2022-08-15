@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap';
+import { isNumber } from '../../../Components/shared';
 
 const Forms = (props) => {
   const { formErrors, handleChange, appraisal,users } = props;
@@ -35,7 +36,7 @@ const Forms = (props) => {
         <div className='col-md-6'>
           <Form.Group className="mb-3">
             <Form.Label>Amount</Form.Label><Form.Label className='error'>*</Form.Label>
-            <Form.Control type="text" name="amount" placeholder="Enter amount" onChange={handleChange} value={appraisal?.amount} />
+            <Form.Control type="text" name="amount" maxLength={6} onKeyPress={isNumber} placeholder="Enter amount" onChange={handleChange} value={appraisal?.amount} />
           </Form.Group>
          {formErrors?.amount ? (<div className="error">{formErrors?.amount}</div>) : null}
 

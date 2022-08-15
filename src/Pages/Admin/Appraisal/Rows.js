@@ -30,7 +30,7 @@ const Rows = (props) => {
       <td>{appraisal?.start_date}</td>
       <td>{appraisal?.end_date}</td>
       <td>{appraisal?.title}</td>
-      <td>{appraisal?.status === 1 ? 'Active' : 'Deactive'}</td>
+      <td><span className={`status ${appraisal?.status === 1 ? 'active' : 'deactive'}`}>{appraisal?.status === 1 ? 'Active' : 'Deactive'}</span></td>
       <td>{appraisal?.created_by?.name}</td>
       <td>
         <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.APPRAISAL.EDIT}${appraisal._id}`} ><FaRegEdit /></Link></div>

@@ -484,9 +484,9 @@ body {
   border-radius: 5px;
 }
 
-.present{
+.present,.active{
   background-color: #128508;
 }
-.absent{
+.absent,.deactive{
   background-color: #ce0f0f;
 }

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
 import Aside from '../../../Components/admin-app/Aside';
 import TopNav from '../../../Components/admin-app/TopNav';
 import CardContainer from '../../../Components/shared/CardContainer';
@@ -8,8 +10,9 @@ import Rows from './Rows';
 import { CustomLoader } from '../../../Components/shared';
 import AttendenceServices from '../../../Helper/Services/AttendenceServices';
 import { toast } from 'react-toastify';
-
-const Attendance = () => {
+import { currentUser, } from '../../../Store/actions/UserActions';
+import Constant from '../../../utils/Constant';
+const Attendance = (props) => {
     const [toggled, setToggled] = useState(false);
     const [isSpinner, setIsSpinner] = useState(false);
     const handleToggleSidebar = (value) => {
@@ -18,7 +21,9 @@ const Attendance = () => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         getUser();
+        props.currentUser();
     }, [])
+
 
     const getUser = () => {
         setIsSpinner(true)
@@ -73,7 +78,7 @@ const Attendance = () => {
         })
 
     }
-
+    const current_user = props.user.current_user;
     return (
         <div className={`admin-app ${toggled ? 'toggled' : ''}`}>
             <Aside
@@ -84,7 +89,7 @@ const Attendance = () => {
                 <TopNav handleToggleSidebar={handleToggleSidebar} />
                 <div className='container'>
                     {isSpinner ? <CustomLoader /> : ''}
-                    <CardContainer title="Attendence list" link={Helper.RouteName.ATTENDENCE.ADD} linkTitle="Attendence">
+                    <CardContainer title="Attendence list" link={current_user?.role === Constant.ADMIN || current_user?.role === Constant.HR_MANEGER ? Helper.RouteName.ATTENDENCE.ADD : ''} linkTitle="Attendence">
                         <Table striped bordered hover responsive>
                             <thead>
                                 <tr>
@@ -93,13 +98,14 @@ const Attendance = () => {
                                     <th>Created by</th>
                                     <th>Created at</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    {current_user?.role===Constant.ADMIN ||current_user?.role===Constant.HR_MANEGER?
+                                    <th>Action</th>:''}
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     users ? (
-                                        users.map((item, index) => <Rows key={item._id} user={item} index={index} handleDelete={handleDelete} />)
+                                        users.map((item, index) => <Rows current_user={current_user} key={item._id} user={item} index={index} handleDelete={handleDelete} />)
                                     ) : null
                                 }
                             </tbody>
@@ -113,4 +119,17 @@ const Attendance = () => {
 }
 
 
-export default Attendance
+const mapStateToProps = (state, ownProps) => {
+
+    return {
+        user: state.user
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        currentUser: () => dispatch(currentUser()),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Attendance);

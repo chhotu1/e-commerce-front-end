@@ -29,7 +29,8 @@ const initialValue = {
     image_name: "",
     access_token: "",
     image_url: "",
-    designation:""
+    designation:"",
+    monthly_salary:"",
 }
 
 const initialState = {

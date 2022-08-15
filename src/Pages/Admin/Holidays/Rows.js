@@ -31,11 +31,10 @@ const Rows = (props) => {
       <td>{holiday?.start_date}</td>
       <td>{holiday?.end_date}</td>
       <td>{holiday?.title}</td>
-      <td>{holiday?.status === 1 ? 'Active' : 'Deactive'}</td>
+      <td><span className={`status ${holiday?.status === 1 ? 'active' : 'deactive'}`}>{holiday?.status === 1 ? 'Active' : 'Deactive'}</span></td>
       <td>{holiday?.created_by?.name}</td>
       {user?.role===Constant.ADMIN ||user?.role===Constant.HR_MANEGER?
       <td>
-        {/* <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.HOLIDAYS.EDIT}${holiday._id}`} ><FaRegEdit /></Link></div> */}
         <div className="btn btn-danger btn-sm" onClick={handleDelete}><FaTrashAlt /></div>
       </td>:''}
     </tr>

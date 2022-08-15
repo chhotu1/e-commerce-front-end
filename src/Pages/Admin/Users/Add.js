@@ -93,7 +93,7 @@ class Add extends Component {
             this.props.handleUserChange(name, value);
             let cities = Cities.filter((e)=>e.state_id===value);
             this.setState({current_cities:cities});
-        } else {
+        }else {
             this.props.handleUserChange(name, value);
         }
     }

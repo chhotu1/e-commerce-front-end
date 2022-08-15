@@ -28,7 +28,7 @@ const Rows = (props) => {
     <tr>
       <td>{index + 1}</td>
       <td>{notification?.title}</td>
-      <td>{notification?.status === 1 ? 'Active' : 'Deactive'}</td>
+      <td><span className={`status ${notification?.status === 1 ? 'active' : 'deactive'}`}>{notification?.status === 1 ? 'Active' : 'Deactive'}</span></td>
       <td>{notification?.created_by?.name}</td>
       <td>
         <div className="btn btn-info btn-sm"><Link to={`${Helper.RouteName.NOTIFICATION.EDIT}${notification._id}`} ><FaRegEdit /></Link></div>

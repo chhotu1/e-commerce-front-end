@@ -41,10 +41,10 @@ class Rows extends Component {
         <td>{user?.name}</td>
         <td>
           {user?.image_url ? (
-            <img src={user?.image_url} alt="" style={{ height: 100, width: 100 }} />
+            <img src={user?.image_url} alt="" style={{ height: 50, width: 50,borderRadius:'100%' }} />
           ) : ''}
         </td>
-        <td>{user?.status === 1 ? 'Active' : 'Deactive'}</td>
+        <td> <span className={`status ${user?.status === 1 ? 'active' : 'deactive'}`}>{user?.status === 1 ? 'Active' : 'Deactive'}</span></td>
         <td>{user?.email}</td>
         <td>{user?.role?getRoleName(user?.role):''}</td>
         <td>

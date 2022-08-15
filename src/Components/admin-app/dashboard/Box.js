@@ -1,15 +1,16 @@
 import React from 'react'
 import {
-    FaArrowCircleRight, FaUserFriends, FaCalendarAlt, FaBirthdayCake,FaClock
+    FaArrowCircleRight, FaUserFriends, FaCalendarAlt, FaBirthdayCake,FaClock,FaUser
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Helper from '../../../Helper';
 const Box = () => {
     const DashboardMenu = [
-        { id: 2, count: 20, title: 'Leave', url: Helper.RouteName.LEAVE.MAIN, color: 'info', icon: <FaUserFriends /> },
-        { id: 3, count: 120, title: 'Holidays', url: Helper.RouteName.HOLIDAYS.MAIN, color: 'success', icon: <FaCalendarAlt /> },
-        { id: 4, count: 10, title: 'Timer', url: Helper.RouteName.TIMER.MAIN, color: 'primary', icon: <FaClock /> },
-        { id: 5, count: 10, title: 'Birthday wishes', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
+        { id: 2, count: 0, title: 'Leave', url: Helper.RouteName.LEAVE.MAIN, color: 'info', icon: <FaUserFriends /> },
+        { id: 3, count: 0, title: 'Holidays', url: Helper.RouteName.HOLIDAYS.MAIN, color: 'success', icon: <FaCalendarAlt /> },
+        { id: 4, count: 0, title: 'Timer', url: Helper.RouteName.TIMER.MAIN, color: 'primary', icon: <FaClock /> },
+        { id: 5, count: 0, title: 'Attendence', url: Helper.RouteName.ATTENDENCE.MAIN, color: 'danger', icon: <FaUser /> },
+        { id: 6, count: 0, title: 'Birthday wishes', url: Helper.RouteName.ADMIN, color: 'danger', icon: <FaBirthdayCake /> },
     ];
     return (
         <div className='dashboard-content p-4'>
