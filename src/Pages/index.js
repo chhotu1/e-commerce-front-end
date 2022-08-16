@@ -23,10 +23,10 @@ handleToggleSidebar(value) {
     return (
       <div>
         <Slider/>
-        <div className='container py-4'>
+        {/* <div className='container py-4'>
           <h2 className='text-center py-4'>Top Product</h2>
           <TopProduct products={this.props.product.products}/>
-        </div>
+        </div> */}
       </div>
     )
   }

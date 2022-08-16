@@ -4,9 +4,14 @@ import { Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Helper from '../../Helper';
 import Clock from './dashboard/Clock';
-
+import { useNavigate } from 'react-router-dom';
 const TopNav = ({ handleToggleSidebar }) => {
     const isTimer = Helper.StorageService.getIsClockTimer();
+    const navigate =useNavigate();
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate("/login");
+      }
     return (
         <div>
             <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
@@ -19,7 +24,7 @@ const TopNav = ({ handleToggleSidebar }) => {
                         {/* <NavDropdown.Item eventKey="4.2" as={Link} to={Helper.RouteName.PROFILE}>View Profile</NavDropdown.Item> */}
                         <NavDropdown.Item eventKey="4.3" as={Link} to={Helper.RouteName.CHANGE_PASSWORD}>Change Password</NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item eventKey="4.4">Setting</NavDropdown.Item>
+                        <NavDropdown.Item eventKey="4.4" onClick={handleLogout}>Logout</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Item as="li" className={isTimer==='true'?'stop':'start'}>
                         <Clock/>
