@@ -30,7 +30,7 @@ const Profle = (props) => {
                             <div className='col-md-3'>
                                 <div className='profile-image-container'>
                                     <img alt='' src={user?.image_url?user?.image_url:Helper.Images.user2}/>
-                                    <p>Chhotu sow</p>
+                                    <p>{user?.name}</p>
                                     <label>Software developer</label>
                                 </div>
                             </div>

@@ -31,6 +31,7 @@ const initialValue = {
     image_url: "",
     designation:"",
     monthly_salary:"",
+    employee_code:"",
 }
 
 const initialState = {

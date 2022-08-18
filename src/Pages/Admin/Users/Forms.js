@@ -54,6 +54,14 @@ export default class Forms extends Component {
               {formErrors?.monthly_salary ? (<div className="error">{formErrors?.monthly_salary}</div>) : null}
             </Form.Group>
           </div>
+          <div className='col-md-6'>
+            <Form.Group className="mb-3">
+              <Form.Label>Employee Code</Form.Label><Form.Label className='error'>*</Form.Label>
+              <Form.Control type="text" name="employee_code" placeholder="Enter Employee code" onChange={handleChange}  value={user?.employee_code?user?.employee_code:''} maxLength={6} onKeyPress={isNumber} />
+              {formErrors?.employee_code ? (<div className="error">{formErrors?.employee_code}</div>) : null}
+            </Form.Group>
+          </div>
+          
 
           <div className='col-md-6'>
             <Form.Group className="mb-3">
