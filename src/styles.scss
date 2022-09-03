@@ -489,7 +489,29 @@ body {
 .absent,.deactive{
   background-color: #ce0f0f;
 }
-
+.portfolio{
+  .col-md-8{
+    p{
+      font-size: 18px;
+    }
+  }
+  ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li{
+      list-style-type: none;
+      padding: 5px 5px 10px;
+      font-size: 20px;
+      strong{
+        padding-right: 10px;
+      } 
+      svg{
+        color: #03c9d7;
+      }
+    }
+  }
+}
 
 //scrollbar css
 /* width */

@@ -8,7 +8,7 @@ import {
     SidebarContent,
 } from 'react-pro-sidebar';
 import {
-    FaGithub, FaCalendarAlt,FaUser,FaFile,FaHome
+     FaCalendarAlt,FaUser,FaFile,FaHome
 } from 'react-icons/fa';
 
 import chhotu from './chhotu.jpg'
@@ -63,7 +63,7 @@ const Sidebar = (props) => {
                         className="sidebar-btn"
                         rel="noopener noreferrer"
                     >
-                        <FaGithub />
+                        <FaUser />
                         <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                             Chhotu
                         </span>
