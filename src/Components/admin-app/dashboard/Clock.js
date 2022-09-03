@@ -57,7 +57,7 @@ const Clock = (props) => {
         var start = new Date(latest_date);
         const today = new Date();
         const minutes = parseInt(Math.abs(today.getTime() - start.getTime()) / (1000 * 60) % 60);
-        const seconds = parseInt(Math.abs(today.getTime() - start.getTime()) / (1000) % 60);
+        // const seconds = parseInt(Math.abs(today.getTime() - start.getTime()) / (1000) % 60);
 
         if (diffDays !== 0 && status === false) {
             setCount(1);
