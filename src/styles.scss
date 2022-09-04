@@ -511,6 +511,31 @@ body {
       }
     }
   }
+  .contact-container{
+    display: flex;
+    margin-top: 20px;
+    h4{
+      padding-left: 20px;
+    }
+    p{
+      background-color: #dff3fc;
+      height: 50px;
+      width: 50px;
+      padding: 10px;
+      color: #149ddd;
+      border-radius: 100%;
+      text-align: center;
+      cursor: pointer;
+      &.hover {
+        background-color: #149ddd;
+        color: #ffffff;
+      }
+    }
+    label{
+      margin-left: 20px;
+    }
+   
+  }
 }
 
 //scrollbar css

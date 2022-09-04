@@ -8,7 +8,7 @@ import {
     SidebarContent,
 } from 'react-pro-sidebar';
 import {
-     FaCalendarAlt,FaUser,FaFile,FaHome
+    FaCalendarAlt, FaUser, FaFile, FaHome
 } from 'react-icons/fa';
 
 import chhotu from './chhotu.jpg'
@@ -24,7 +24,7 @@ const Sidebar = (props) => {
             <SidebarHeader>
                 <div className='sidebarheader'
                 >
-                    <img alt='' src={chhotu} style={{width:150,height:150,borderRadius:100}}/>
+                    <img alt='' src={chhotu} style={{ width: 150, height: 150, borderRadius: 100 }} />
                     <h3 className='pt-3'>Chhotu Sow</h3>
                 </div>
             </SidebarHeader>
@@ -34,7 +34,7 @@ const Sidebar = (props) => {
                         icon={<FaHome />}
                         suffix={<span className="badge red">New</span>}
                     >
-                        Dashboard
+                        Home
                     </MenuItem>
                 </Menu>
 
